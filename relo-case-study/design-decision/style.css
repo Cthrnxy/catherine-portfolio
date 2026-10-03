@@ -1,0 +1,9 @@
+:root{--blue:#064e3b;--button:#924900;--button-hover:#7a3d00;--hotspot:#f39c45;--button-shadow:rgba(146,73,0,.18)}
+.shell+.shell{margin-top:0}
+.connector{position:absolute;left:0!important;right:auto!important;top:0!important;transform-origin:0 0!important;max-width:none}
+.connector img{display:block;max-width:none;width:auto;height:auto}
+.check-patch{position:absolute;inset:0;pointer-events:none}
+.hotspot.checkbox{border-radius:4px}
+.hotspot.save{border-radius:12px}
+#approval-flow .annotation{opacity:1;transform:none;transition:none;animation:none}
+.flow-next{position:absolute;left:calc(var(--phone-width) + 16.5px * var(--screen-scale));top:calc(577px * var(--screen-scale))}

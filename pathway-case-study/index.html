@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pathway case study — a self-service kiosk and website for community employment centers.">
+  <title>Pathway — UX Case Study</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../shared/case-study.css?v=2">
+  <script src="../shared/design-decision.js" defer></script>
+</head>
+<body data-project="pathway">
+  <div class="case-backdrop" aria-hidden="true"></div>
+  <header class="topbar page-width">
+    <a class="wordmark" href="../index.html" aria-label="Catherine Y. home">
+      <svg class="wordmark-logo" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+        <path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+        <circle cx="786" cy="455" r="36" fill="currentColor"/>
+      </svg>
+      <span>CATHERINE Y.</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="../index.html#work">WORK</a>
+      <span aria-disabled="true">RESUME</span>
+    </nav>
+    <div class="mobile-nav">
+      <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i class="menu-icon menu-icon--bars fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="menu-icon menu-icon--close fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" hidden>
+        <a href="../index.html">HOME</a>
+        <a href="../index.html#work">WORK</a>
+        <span aria-disabled="true">RESUME</span>
+      </nav>
+    </div>
+  </header>
+
+
+<main id="top" class="pathway-main">
+  <aside class="case-index" aria-label="Case study sections">
+    <button class="case-index__label" type="button" aria-expanded="false" aria-label="Toggle case study index">INDEX</button>
+    <nav class="case-index__nav">
+      <a href="#overview" data-index-target="overview"><span class="case-index__dot" aria-hidden="true"></span><span>OVERVIEW</span></a>
+      <a href="#problem" data-index-target="problem"><span class="case-index__dot" aria-hidden="true"></span><span>PROBLEM</span></a>
+      <a href="#research" data-index-target="research"><span class="case-index__dot" aria-hidden="true"></span><span>RESEARCH</span></a>
+      <a href="#design-goal" data-index-target="design-goal"><span class="case-index__dot" aria-hidden="true"></span><span>DESIGN GOAL</span></a>
+      <a href="#solutions" data-index-target="solutions"><span class="case-index__dot" aria-hidden="true"></span><span>FINAL SOLUTION</span></a>
+      <a href="#design-decision" data-index-target="design-decision"><span class="case-index__dot" aria-hidden="true"></span><span>DESIGN DECISION</span></a>
+      <a href="#impact" data-index-target="impact"><span class="case-index__dot" aria-hidden="true"></span><span>IMPACT</span></a>
+      <a href="#reflection" data-index-target="reflection"><span class="case-index__dot" aria-hidden="true"></span><span>REFLECTION</span></a>
+    </nav>
+  </aside>
+
+
+<section class="case-hero case-hero--pathway" aria-label="Pathway project hero">
+  <img class="case-hero__background" src="assets/pathway-hero-background.webp" alt="" aria-hidden="true" width="2048" height="1369" decoding="async" fetchpriority="high">
+  <img class="case-hero__title" src="assets/pathway-hero-title.png" alt="Pathway" width="1990" height="560" decoding="async">
+  <img class="case-hero__mockup" src="assets/pathway-hero-kiosk.webp" alt="Pathway kiosk mockup" width="693" height="621" decoding="async">
+</section>
+
+<section class="project-meta shell" aria-label="Project information">
+      <dl><div><dt>Role</dt><dd>UX Designer</dd></div><div><dt>Tool</dt><dd>Figma</dd></div><div><dt>Responsibilities</dt><dd>UI Design · Prototyping</dd></div><div><dt>Duration</dt><dd>8 Weeks</dd></div></dl>
+    </section>
+<section id="overview" class="section overview"><div class="shell"><p class="eyebrow">What is Pathway</p><h1 class="display">New kiosk experience for community employment centers</h1><div class="overview__grid"><div class="overview-media"><figure class="pathway-media replacement-media"><img src="assets/pathway-kiosk-overview.webp" alt="Pathway kiosk overview screen" width="1372" height="1176" loading="lazy" decoding="async"></figure></div><div class="overview__copy"><h2>Helping job seekers, help themselves</h2><p>The kiosk was designed for Pathway Employment Centers to help manage members more efficiently by handling simple tasks for both members and new visitors, allowing Career Advisors to focus on more meaningful support. It introduces the center&#x27;s services, enables clients to explore employment resources and book appointments when additional assistance is needed, and supports the center&#x27;s member management system by tracking member records, progress, and activity history.</p><p>This helps Career Advisors provide more personalized support while allowing members to view their job-seeking journey from registration to employment.</p></div></div></div></section>
+<section id="problem" class="section problem shell"><p class="eyebrow">Problem</p><div class="problem__grid"><figure class="media-card problem-media--contain pathway-problem-media--plain"><img src="assets/pathway-problem-process-flow.png" alt="Before: new clients rely on the front desk to check documents, fill out a form and obtain a membership number before meeting a career advisor. After: clients can get the number and see an advisor more directly." loading="lazy" width="1138" height="968" decoding="async"></figure><div><h2>Too much dependence on guidance from staff, causing inefficiencies</h2><div class="pain-list">
+<article><img class="pain-icon" src="assets/pathway-problem-icon-job-seeker.svg" alt="" width="64" height="64" loading="lazy" decoding="async"><div><h3>Job Seeker</h3><p>Relies on staff to access jobs and services Needs guidance throughout the employment journey</p></div></article>
+<article><img class="pain-icon" src="assets/pathway-problem-icon-career-advisor.svg" alt="" width="64" height="64" loading="lazy" decoding="async"><div><h3>Career Advisor</h3><p>Spends valuable time answering simple repetitive questions</p></div></article>
+<article><img class="pain-icon" src="assets/pathway-problem-icon-employment-center.svg" alt="" width="64" height="64" loading="lazy" decoding="async"><div><h3>Pathway Center</h3><p>Limited visibility into member engagement</p></div></article>
+</div></div></div></section><section id="research" class="section research shell"><p class="eyebrow">Research</p><h2 class="section-title">Who we’re designing for</h2><div class="personas">
+<article class="persona"><h3>Front Desk Cindy</h3><figure class="pathway-media persona-photo" style="--media-ratio:1" data-figma-node="1:748" aria-hidden="true"><img src="assets/pathway-persona-front-desk-cindy.png" alt="" loading="lazy" width="343" height="317" decoding="async"></figure><blockquote>“I’m usually the first person clients meet when they walk into the center. Many arrive without an appointment, forget who their advisor is, or are unsure which department can help them. When several people arrive at once, it becomes difficult to assist everyone quickly.”</blockquote><div class="persona__details"><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Goals</h4><ul><li>Help walk-in members quickly access the right services.</li><li>Reduce repetitive questions and manual check-in.</li><li>Improve service efficiency across the center.</li></ul></div><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M6 11.8333H12.6667M6.83333 6.83333H6.84167M11.8333 6.83333H11.8417M17.6667 9.33333C17.6667 13.9357 13.9357 17.6667 9.33333 17.6667C4.73096 17.6667 1 13.9357 1 9.33333C1 4.73096 4.73096 1 9.33333 1C13.9357 1 17.6667 4.73096 17.6667 9.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pain Points</h4><ul><li>Many visitors arrive without appointments.</li><li>Clients are unsure which department or advisor to contact.</li><li>High visitor volume makes front desk management difficult.</li></ul></div></div></article>
+<article class="persona"><h3>Career Advisor Ivy</h3><figure class="pathway-media persona-photo" style="--media-ratio:1" data-figma-node="1:765" aria-hidden="true"><img src="assets/pathway-persona-career-advisor-ivy.png" alt="" loading="lazy" width="309" height="301" decoding="async"></figure><blockquote>“I want to find a job and learn new skills, but my limited English makes it difficult to understand programs, applications, and onboarding instructions. I often cannot find clear information online, so I visit or call the agency for help.”</blockquote><div class="persona__details"><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Goals</h4><ul><li>Provide personalized career guidance.</li><li>Help members achieve employment.</li><li>Manage multiple cases efficiently.</li></ul></div><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M6 11.8333H12.6667M6.83333 6.83333H6.84167M11.8333 6.83333H11.8417M17.6667 9.33333C17.6667 13.9357 13.9357 17.6667 9.33333 17.6667C4.73096 17.6667 1 13.9357 1 9.33333C1 4.73096 4.73096 1 9.33333 1C13.9357 1 17.6667 4.73096 17.6667 9.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pain Points</h4><ul><li>Time spent on repetitive administrative tasks.</li><li>Members frequently seek help without appointments.</li><li>Limited visibility into member progress before meetings.</li><li>Managing many members simultaneously.</li></ul></div></div></article>
+<article class="persona"><h3>Member Lihua</h3><figure class="pathway-media persona-photo" style="--media-ratio:1" data-figma-node="1:782" aria-hidden="true"><img src="assets/pathway-persona-member-lihua.png" alt="" loading="lazy" width="321" height="303" decoding="async"></figure><blockquote>“I manage many clients at the same time. Some clients visit without appointments and clients need to brief who they are repeatedly. It is also challenging to memorize every client. I want a better way to organize follow-ups, set clear expectations, and help clients become more independent.”</blockquote><div class="persona__details"><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Goals</h4><ul><li>Find employment opportunities.</li><li>Explore training programs.</li><li>Receive support when needed.</li></ul></div><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M6 11.8333H12.6667M6.83333 6.83333H6.84167M11.8333 6.83333H11.8417M17.6667 9.33333C17.6667 13.9357 13.9357 17.6667 9.33333 17.6667C4.73096 17.6667 1 13.9357 1 9.33333C1 4.73096 4.73096 1 9.33333 1C13.9357 1 17.6667 4.73096 17.6667 9.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pain Points</h4><ul><li>Difficult to understand available services.</li><li>Low confidence using online job platforms.</li><li>Relies heavily on staff for guidance.</li><li>Language barriers make information difficult to access.</li></ul></div></div></article>
+</div></section><section id="design-goal" class="section design-goal shell"><p class="eyebrow">Design goal</p><div class="goal-grid"><div><h2>Improving service quality and efficiency</h2><figure class="diagram-media service-map"><img src="assets/pathway-service-map.png" alt="A kiosk helps members find jobs and training on their own, reduces repetitive front desk inquiries, and supports personalized career advisor service." loading="lazy" width="1545" height="867" decoding="async"></figure></div><div class="goal-list">
+<article><h3>Prepare members before their visit</h3><p>Introduce employment center services and guide new visitors through the membership onboarding process.</p></article>
+<article><h3>Enable clients to self-service</h3><p>Empower members to independently explore jobs, training programs, and available services through a self-service experience.</p></article>
+<article><h3>Reduce repetitive administrative tasks</h3><p>Reduce reliance on staff for routine tasks such as check-in, job search, and booking appointments.</p></article>
+<article><h3>Support better member management</h3><p>Capture member activity to help career advisors better understand engagement and prepare for personalized career support.</p></article>
+</div></div></section><section id="solutions" class="section solutions"><div class="shell"><p class="eyebrow">Final solution</p><div class="solution-list">
+<article class="solution"><div class="solution__copy"><h2>Find jobs independently</h2><p>Members can browse exclusive job listings, save positions they are interested in, and learn about career opportunities before requesting advisor support.</p></div><figure class="pathway-media replacement-media pathway-media--find-jobs-hd"><img src="assets/pathway-kiosk-find-jobs.webp" alt="Pathway kiosk job search screen" width="970" height="1154" loading="lazy" decoding="async"></figure></article>
+<article class="solution"><div class="solution__copy"><h2>Access programs and services</h2><p>Training programs, career workshops, and employment services are organized into a self-service experience. Members can review eligibility, join waitlists, and book appointments without staff assistance.</p></div><figure class="pathway-media replacement-media"><img src="assets/pathway-kiosk-programs.webp" alt="Pathway kiosk programs screen" width="2048" height="1981" loading="lazy" decoding="async"></figure></article>
+<article class="solution"><div class="solution__copy"><h2>Stay connected</h2><p>The dashboard keeps members connected through appointments, activity history, and personalized services while allowing advisors to better understand each member&#x27;s interests and progress.</p></div><figure class="pathway-media replacement-media"><img src="assets/pathway-web-dashboard.webp" alt="Pathway website dashboard screen" width="1494" height="1233" loading="lazy" decoding="async"></figure></article>
+<article class="solution"><div class="solution__copy"><h2>Website view</h2><p>A website version is also available, allowing members to access core features and view their activity history. This gives career advisors better visibility into each member&#x27;s progress and supports more personalized follow-up.</p></div><figure class="pathway-media replacement-media"><img src="assets/pathway-web-history.webp" alt="Pathway website activity screen" width="1494" height="1308" loading="lazy" decoding="async"></figure></article>
+</div></div></section><section id="design-decision" class="section design-decision" aria-labelledby="design-decision-title">
+  <div class="shell"><p id="design-decision-title" class="eyebrow">Design decision</p></div>
+  <div class="design-decision__interactive">
+    <iframe class="design-decision__frame" data-design-decision data-src="design-decision/index.html" title="Pathway interactive design decision" width="1440" height="900" scrolling="no"></iframe>
+    <noscript><p class="shell"><a href="design-decision/index.html">Open the interactive design decision</a></p></noscript>
+  </div>
+</section><section id="impact" class="section impact shell"><p class="eyebrow">Impact</p><div class="impact-grid">
+<article><img class="stakeholder-icon" src="assets/pathway-problem-icon-job-seeker.svg" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Job Seeker</h3><p>Access employment resources independently.</p></article>
+<article><img class="stakeholder-icon" src="assets/pathway-problem-icon-career-advisor.svg" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Career Advisor</h3><p>Spend more time providing career guidance instead of answering routine questions.</p></article>
+<article><img class="stakeholder-icon" src="assets/pathway-problem-icon-employment-center.svg" alt="" width="64" height="64" loading="lazy" decoding="async"><h3>Pathway Center</h3><p>Improve member engagement and gain better visibility into service participation.</p></article>
+</div></section><section id="reflection" class="section reflection"><div class="shell reflection__grid"><div><h2>Reflection</h2><figure class="pathway-media pathway-mark" style="--media-ratio:0.864" data-figma-node="1:842" aria-hidden="true"><img src="assets/pathway-logo.svg" alt="" loading="lazy" width="322" height="366" decoding="async"></figure></div><div><p>Designing a kiosk taught me to think beyond individual screens and design. Rather than focusing solely on member interactions, I learned to consider the needs of both members and staff, and how a digital platform can improve service quality without replacing human support. By reducing routine administrative tasks and connecting member activities across touch points, career advisors can spend more time providing personalized career guidance while the center delivers a more efficient and organized service experience.</p><p>Moving forward, I would validate the design through usability testing with members of different ages, language backgrounds, and digital literacy levels.</p></div></div><div class="next-project-row page-width">
+    <a class="next-project-link" href="../onway-case-study/index.html" aria-label="Next project: ONWAY">
+      <span>NEXT PROJECT</span>
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</section>
+  <footer class="footer">
+    <div class="footer-watermark" aria-hidden="true">
+      <svg class="footer-watermark-logo" viewBox="0 0 1024 1024" focusable="false">
+        <path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+        <circle cx="786" cy="455" r="36" fill="currentColor"/>
+      </svg>
+      <span>CATHERINE Y.</span>
+    </div>
+    <div class="footer-inner page-width">
+      <div class="footer-row footer-row--top">
+        <p>LET&apos;S CONNECT</p>
+        <div class="social-links">
+          <a href="mailto:sipheyy@gmail.com" aria-label="Email Catherine" title="sipheyy@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+          <span aria-label="LinkedIn link coming soon" title="LinkedIn link coming soon"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
+        </div>
+      </div>
+      <div class="footer-row footer-row--contact"><p>Base in the Bay Area</p></div>
+      <div class="footer-bottom-row"><p class="copyright">© 2026 Catherine Y. All rights reserved.</p><div class="footer-brand" aria-label="Catherine Y."><svg class="footer-brand-logo" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+  <path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+  <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+  <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+  <circle cx="786" cy="455" r="36" fill="currentColor"/>
+</svg><span>CATHERINE Y.</span></div></div>
+    </div>
+  </footer>
+  </main>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = () => {
+      mobileMenu.hidden = true;
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation menu');
+      menuButton.classList.remove('is-open');
+    };
+    menuButton?.addEventListener('click', () => {
+      const willOpen = mobileMenu.hidden;
+      mobileMenu.hidden = !willOpen;
+      document.body.classList.toggle('menu-open', willOpen);
+      menuButton.setAttribute('aria-expanded', String(willOpen));
+      menuButton.setAttribute('aria-label', willOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuButton.classList.toggle('is-open', willOpen);
+    });
+    mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !mobileMenu.hidden) closeMenu();
+    });
+
+    const caseIndex = document.querySelector('.case-index');
+    const indexToggle = caseIndex?.querySelector('.case-index__label');
+    const indexLinks = [...document.querySelectorAll('.case-index__nav a')];
+    let indexPinnedOpen = false;
+
+    const setIndexExpanded = (expanded) => {
+      if (!caseIndex) return;
+      caseIndex.classList.toggle('is-expanded', expanded);
+      indexToggle?.setAttribute('aria-expanded', String(expanded));
+    };
+
+    indexToggle?.addEventListener('click', () => {
+      indexPinnedOpen = !indexPinnedOpen;
+      caseIndex?.classList.toggle('is-pinned', indexPinnedOpen);
+      setIndexExpanded(indexPinnedOpen);
+    });
+
+    document.addEventListener('mousemove', (event) => {
+      if (!caseIndex || window.innerWidth < 769 || !caseIndex.classList.contains('is-visible') || indexPinnedOpen) return;
+      const inLeftTriggerZone = event.clientX <= 100;
+      const inIndexPanel = caseIndex.contains(event.target);
+      setIndexExpanded(inLeftTriggerZone || inIndexPanel);
+    }, { passive: true });
+
+    caseIndex?.addEventListener('mouseenter', () => {
+      if (!indexPinnedOpen) setIndexExpanded(true);
+    });
+
+    caseIndex?.addEventListener('mouseleave', () => {
+      if (!indexPinnedOpen) setIndexExpanded(false);
+    });
+    const indexSections = indexLinks
+      .map((link) => document.getElementById(link.dataset.indexTarget))
+      .filter(Boolean);
+    const hero = document.querySelector('.case-hero');
+
+    const updateIndex = () => {
+      if (!caseIndex || !hero || window.innerWidth < 769) return;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      const shouldShowIndex = heroBottom < window.innerHeight * 0.72;
+      caseIndex.classList.toggle('is-visible', shouldShowIndex);
+      if (!shouldShowIndex && !indexPinnedOpen) setIndexExpanded(false);
+
+      const markerY = Math.min(window.innerHeight * 0.34, 300);
+      let activeId = indexSections[0]?.id;
+      indexSections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= markerY) activeId = section.id;
+      });
+      indexLinks.forEach((link) => {
+        const active = link.dataset.indexTarget === activeId;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    indexLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        const target = document.getElementById(link.dataset.indexTarget);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    window.addEventListener('scroll', updateIndex, { passive: true });
+    window.addEventListener('resize', updateIndex);
+    updateIndex();
+  </script>
+</body>
+</html>

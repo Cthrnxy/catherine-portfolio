@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Relo case study — a furniture and appliance handoff experience for tenants.">
+  <title>Relo — UX Case Study</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../shared/case-study.css?v=2">
+  <script src="../shared/design-decision.js" defer></script>
+</head>
+<body data-project="relo">
+  <div class="case-backdrop" aria-hidden="true"></div>
+  <header class="topbar page-width">
+    <a class="wordmark" href="../index.html" aria-label="Catherine Y. home">
+      <svg class="wordmark-logo" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+        <path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+        <circle cx="786" cy="455" r="36" fill="currentColor"/>
+      </svg>
+      <span>CATHERINE Y.</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="../index.html#work">WORK</a>
+      <span aria-disabled="true">RESUME</span>
+    </nav>
+    <div class="mobile-nav">
+      <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i class="menu-icon menu-icon--bars fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="menu-icon menu-icon--close fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" hidden>
+        <a href="../index.html">HOME</a>
+        <a href="../index.html#work">WORK</a>
+        <span aria-disabled="true">RESUME</span>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+  <aside class="case-index" aria-label="Case study sections">
+    <button class="case-index__label" type="button" aria-expanded="false" aria-label="Toggle case study index">INDEX</button>
+    <nav class="case-index__nav">
+      <a href="#overview" data-index-target="overview"><span class="case-index__dot" aria-hidden="true"></span><span>OVERVIEW</span></a>
+      <a href="#problem" data-index-target="problem"><span class="case-index__dot" aria-hidden="true"></span><span>PROBLEM</span></a>
+      <a href="#research" data-index-target="research"><span class="case-index__dot" aria-hidden="true"></span><span>RESEARCH</span></a>
+      <a href="#insights" data-index-target="insights"><span class="case-index__dot" aria-hidden="true"></span><span>KEY INSIGHTS</span></a>
+      <a href="#story" data-index-target="story"><span class="case-index__dot" aria-hidden="true"></span><span>DESIGN JOURNEY</span></a>
+      <a href="#solutions" data-index-target="solutions"><span class="case-index__dot" aria-hidden="true"></span><span>FINAL SOLUTION</span></a>
+      <a href="#design-decision" data-index-target="design-decision"><span class="case-index__dot" aria-hidden="true"></span><span>DESIGN DECISION</span></a>
+      <a href="#reflection" data-index-target="reflection"><span class="case-index__dot" aria-hidden="true"></span><span>REFLECTION</span></a>
+    </nav>
+  </aside>
+
+
+<section class="case-hero case-hero--relo" aria-label="Relo project hero">
+  <img class="case-hero__background" src="assets/relo-hero-background.webp" alt="" aria-hidden="true" width="2048" height="1565" decoding="async" fetchpriority="high">
+  <img class="case-hero__title" src="assets/relo-hero-title.svg" alt="Relo" width="965" height="306" decoding="async">
+  <img class="case-hero__mockup" src="assets/relo-hero-hand.webp" alt="Relo mobile app mockup" width="2047" height="2047" decoding="async">
+</section>
+
+<section class="project-meta shell reveal" aria-label="Project information">
+      <dl><div><dt>Role</dt><dd>UX Designer</dd></div><div><dt>Tool</dt><dd>Figma</dd></div><div><dt>Responsibilities</dt><dd>UI Design · Prototyping</dd></div><div><dt>Duration</dt><dd>8 Weeks</dd></div></dl>
+    </section>
+
+    <section id="overview" class="section overview">
+      <div class="shell">
+        <p class="eyebrow reveal">What is Relo</p>
+        <h1 class="display reveal">Enabling tenants to sell furniture and appliances to the next tenant, through a trusted app experience</h1>
+        <div class="overview__grid">
+          <figure class="media-card reveal"><img src="assets/relo-overview-moving-home.webp" alt="Furniture in a bright apartment during a move" width="1260" height="1156" loading="lazy" decoding="async"></figure>
+          <div class="overview__copy reveal">
+            <h2>A furniture and appliance transfer platform for new tenants</h2>
+            <p>Relo is a platform designed to simplify the transfer of home appliances between tenants. Instead of moving, storing, or discarding appliances, outgoing tenants can transfer them directly to the next resident through a structured process with landlord involvement.</p>
+            <p>This reduces moving costs and waste while helping incoming residents settle into a new home more affordably. By supporting the entire transition from move-out to move-in, Relo creates a smoother, more sustainable rental experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem" class="section problem shell">
+      <p class="eyebrow reveal">Problem</p>
+      <div class="problem__grid">
+        <figure class="media-card reveal"><img src="assets/relo-problem-moving-friction.webp" alt="Bulky furniture and moving boxes in an apartment" width="1200" height="1142" loading="lazy" decoding="async"></figure>
+        <div class="reveal">
+          <h2>Tenants often spend more time and money dealing with home appliances than actually moving</h2>
+          <div class="pain-list">
+            <article><img class="pain-icon" src="assets/relo-problem-icon-high-cost.svg" alt="" aria-hidden="true" width="40" height="40" loading="lazy" decoding="async"><div><h3>High Moving Costs</h3><p>Large appliances are expensive to transport, store, or dispose of during a move.</p></div></article>
+            <article><img class="pain-icon" src="assets/relo-problem-icon-poor-timing.svg" alt="" aria-hidden="true" width="40" height="40" loading="lazy" decoding="async"><div><h3>Poor Timing</h3><p>Outgoing and incoming tenants rarely have an easy way to coordinate appliance transfers.</p></div></article>
+            <article><img class="pain-icon" src="assets/relo-problem-icon-waste.svg" alt="" aria-hidden="true" width="40" height="40" loading="lazy" decoding="async"><div><h3>Unnecessary Waste</h3><p>Many functional appliances are discarded simply because the transfer process is inconvenient.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="section research shell">
+      <p class="eyebrow reveal">Research</p>
+      <div class="competitive reveal">
+        <h2>Competitive analysis</h2>
+        <p class="competitive-scroll-hint" aria-hidden="true">Swipe to compare →</p><div class="table-wrap" tabindex="0" aria-label="Scrollable competitive analysis table">
+          <table>
+            <thead><tr><th>Feature</th><th><div class="comp-brand"><img src="assets/logo-facebook-marketplace.png" alt="Facebook Marketplace logo" loading="lazy" width="120" height="120" decoding="async"><span>Facebook Marketplace</span></div></th><th><div class="comp-brand"><img src="assets/logo-xianyu.png" alt="Xianyu logo" loading="lazy" width="120" height="120" decoding="async"><span>Xianyu</span></div></th><th><div class="comp-brand"><img src="assets/logo-mercari.png" alt="Mercari logo" loading="lazy" width="120" height="120" decoding="async"><span>Mercari</span></div></th><th><div class="comp-brand"><img src="assets/logo-offerup.png" alt="OfferUp logo" loading="lazy" width="120" height="120" decoding="async"><span>OfferUp</span></div></th></tr></thead>
+            <tbody>
+              <tr><th>Local listings / nearby discovery</th><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td></tr>
+              <tr><th>Secure payment system</th><td><span class="comp-na" aria-label="Not available">—</span></td><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td></tr>
+              <tr><th>Large secondhand marketplace</th><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td></tr>
+              <tr><th>Support for large furniture pickup</th><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td class="yes"><img src="assets/relo-competitive-check.png" alt="Yes" width="26" height="26" loading="lazy" decoding="async"></td></tr>
+              <tr><th>Furniture handoff coordination</th><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td></tr>
+              <tr><th>Time-sensitive move coordination</th><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td></tr>
+              <tr><th>Tenant-to-tenant transfer flow</th><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td><td><span class="comp-na" aria-label="Not available">—</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h2 class="section-title reveal">Who we’re designing for</h2>
+      <div class="personas">
+        <article class="persona reveal">
+          <h3>Outgoing Tenant Jason</h3><figure class="persona-photo"><img src="assets/relo-persona-jason.webp" alt="Portrait of outgoing tenant Jason" width="618" height="618" loading="lazy" decoding="async"></figure>
+          <blockquote>“I'm an international student, and I'll be graduating soon. I'll be moving to another city for graduate school, so I need to pack up everything I've collected over the past few years. I have a lot of furniture and household items, and I hope I can sell them before I move out.”</blockquote>
+          <div class="persona__details"><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Goals</h4><ul><li>Sell appliances before my lease ends.</li><li>Keep using essential furniture until my last day.</li><li>Avoid moving bulky furniture to another city.</li><li>Pass usable items to the next owner instead of throwing them away.</li></ul></div><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M6 11.8333H12.6667M6.83333 6.83333H6.84167M11.8333 6.83333H11.8417M17.6667 9.33333C17.6667 13.9357 13.9357 17.6667 9.33333 17.6667C4.73096 17.6667 1 13.9357 1 9.33333C1 4.73096 4.73096 1 9.33333 1C13.9357 1 17.6667 4.73096 17.6667 9.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pain Points</h4><ul><li>Buyers often want to pick up furniture too early.</li><li>My furniture may not sell before move-out day.</li><li>Large items are expensive to move or dispose of.</li></ul></div></div>
+        </article>
+        <article class="persona reveal">
+          <h3>Incoming Tenant Johnson</h3><figure class="persona-photo"><img src="assets/relo-persona-johnson.webp" alt="Portrait of incoming tenant Johnson" width="618" height="618" loading="lazy" decoding="async"></figure>
+          <blockquote>“I'm moving to San Francisco for a new job and will be sharing an apartment with my roommate. Since we're starting from scratch, we need to buy almost everything for our new place. I just hope we can have the basic essentials ready when we move in, so we don't have to rush around buying everything at once.”</blockquote>
+          <div class="persona__details"><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Goals</h4><ul><li>Find affordable furniture before moving in.</li><li>Reduce transportation and assembly work.</li><li>Coordinate purchases with my roommate.</li><li>Move into a home that's ready to live in.</li></ul></div><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M6 11.8333H12.6667M6.83333 6.83333H6.84167M11.8333 6.83333H11.8417M17.6667 9.33333C17.6667 13.9357 13.9357 17.6667 9.33333 17.6667C4.73096 17.6667 1 13.9357 1 9.33333C1 4.73096 4.73096 1 9.33333 1C13.9357 1 17.6667 4.73096 17.6667 9.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pain Points</h4><ul><li>Furnished apartments are expensive.</li><li>Pickup dates rarely match my move-in schedule.</li><li>Buying from multiple sellers takes too much time.</li></ul></div></div>
+        </article>
+        <article class="persona reveal">
+          <h3>Landlord Lucy</h3><figure class="persona-photo"><img src="assets/relo-persona-lucy.webp" alt="Portrait of landlord Lucy" width="618" height="618" loading="lazy" decoding="async"></figure>
+          <blockquote>“I own several apartments near a university, so there's always a lot of tenant turnover throughout the year. Every time someone moves out, I need to make sure the unit is cleaned, inspected, and ready for the next tenant as quickly as possible.”</blockquote>
+          <div class="persona__details"><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Goals</h4><ul><li>Keep the property move-in ready.</li><li>Approve furniture that remains in the unit.</li><li>Keep ownership records clear.</li><li>Avoid disputes between tenants.</li></ul></div><div><h4><svg class="persona-detail-icon" viewBox="0 0 19 19" fill="none" aria-hidden="true" focusable="false"><path d="M6 11.8333H12.6667M6.83333 6.83333H6.84167M11.8333 6.83333H11.8417M17.6667 9.33333C17.6667 13.9357 13.9357 17.6667 9.33333 17.6667C4.73096 17.6667 1 13.9357 1 9.33333C1 4.73096 4.73096 1 9.33333 1C13.9357 1 17.6667 4.73096 17.6667 9.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pain Points</h4><ul><li>Tenants leave furniture without permission.</li><li>Ownership becomes unclear after move-out.</li><li>Leftover furniture can delay cleaning and future rentals.</li></ul></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="insights" class="section insights">
+      <div class="shell insights__grid">
+        <article class="insight-card reveal"><p class="eyebrow">Key insight</p><p>While existing resale platforms make buying and selling easy, they don't support the time-sensitive coordination that happens during a rental transition. Outgoing tenants need to clear their homes before moving out, incoming tenants need furniture before moving in, and landlords need the unit to remain organized throughout the process.</p></article>
+        <article class="insight-card insight-card--warm reveal"><p class="eyebrow">Goals</p><p>Help outgoing tenants sell or transfer furniture before moving out. Help incoming tenants furnish their homes before moving in. Support landlords in keeping units organized during tenant turnover.</p></article>
+      </div>
+    </section>
+
+    <section id="story" class="section story shell reveal">
+      <div class="story__header">
+        <h2>Designing for a complex moving journey</h2>
+        <p>Designing Relo was more than creating a furniture marketplace. The challenge was to support users through different stages of moving while keeping the experience clear and easy to navigate. Users may switch between selling, buying, and browsing throughout the journey, so the interface needed to communicate their current context without requiring them to think about different roles.</p>
+      </div>
+      <figure class="story__visual"><img src="assets/relo-current-next-flow.webp" alt="Relo current unit and next unit screens connected through the moving journey" width="2048" height="955" loading="lazy" decoding="async"></figure>
+    </section>
+
+    <section id="solutions" class="section solutions">
+      <div class="shell"><p class="eyebrow reveal">Final solution</p>
+        <div class="solution-list">
+          <article class="solution reveal"><div class="solution__copy"><h2>List furniture before move-out</h2><p>Outgoing tenants can list furniture they plan to leave behind, while incoming tenants can reserve items before the move. This reduces unnecessary transportation and gives both parties more certainty during the moving process.</p></div><div class="phone-stack"><img src="assets/relo-screen-listing.webp" alt="Relo listing screen" width="946" height="2048" loading="lazy" decoding="async"><img src="assets/relo-screen-furniture-detail.webp" alt="Relo furniture detail screen" width="946" height="2048" loading="lazy" decoding="async"></div></article>
+          <article class="solution reveal"><div class="solution__copy"><h2>Discover apartments &amp; available furniture for the future move-in</h2><p>Incoming tenants can browse apartments and preview furniture that may be available before moving in. This helps users understand what is already in the unit and plan what they still need to purchase.</p></div><div class="phone-stack"><img src="assets/relo-screen-current-unit.webp" alt="Current unit screen" width="946" height="2048" loading="lazy" decoding="async"><img src="assets/relo-screen-next-unit.webp" alt="Next unit screen" width="946" height="2048" loading="lazy" decoding="async"></div></article>
+          <article class="solution reveal"><div class="solution__copy"><h2>Coordinate the transfer</h2><p>A shared communication flow allows tenants to confirm item availability, arrange handoff details, and track the transfer status. Keeping everything in one place reduces confusion and minimizes last-minute coordination.</p></div><div class="phone-stack"><img src="assets/relo-screen-explore.webp" alt="Explore screen" width="946" height="2048" loading="lazy" decoding="async"><img src="assets/relo-screen-nearby.webp" alt="Nearby furniture screen" width="946" height="2048" loading="lazy" decoding="async"></div></article>
+          <article class="solution reveal"><div class="solution__copy"><h2>Extend furniture life cycle</h2><p>If furniture is not transferred to the next tenant, it can be listed to nearby residents through the marketplace. This gives items another opportunity to be reused instead of being discarded.</p></div><div class="phone-stack"><img src="assets/relo-screen-transfer.webp" alt="Transfer screen" width="946" height="2048" loading="lazy" decoding="async"><img src="assets/relo-screen-confirmation.webp" alt="Confirmation screen" width="946" height="2048" loading="lazy" decoding="async"></div></article>
+        </div>
+      </div>
+    </section>
+    <section id="design-decision" class="section design-decision" aria-labelledby="design-decision-title">
+  <div class="shell"><p id="design-decision-title" class="eyebrow">Design decision</p></div>
+  <div class="design-decision__interactive">
+    <iframe class="design-decision__frame" data-design-decision data-src="design-decision/index.html" title="Relo interactive design decision" width="1440" height="900" scrolling="no"></iframe>
+    <noscript><p class="shell"><a href="design-decision/index.html">Open the interactive design decision</a></p></noscript>
+  </div>
+</section><section id="reflection" class="section reflection">
+      <div class="shell reflection__grid reveal">
+        <div><h2>Reflection</h2><img class="relo-app-logo" src="assets/relo-app-logo.webp" alt="Relo app logo" width="488" height="474" loading="lazy" decoding="async"></div>
+        <div><p>Relo started from a personal experience. My friend transferred their apartment and furniture to me with the property management approval. I realized how transferring furniture and appliances is a lot more convenient than getting rid of it.</p><p>At first, I thought the solution might be a simple platform for transferring furniture and appliances. But as I spoke with users and mapped out different moving situations, I found that the bigger challenge was helping people manage everything happening before, during, and after a move.</p><p>That realization led to the “current / next” switching system to help users stay oriented as their needs changed throughout the moving process, and shaped the overall structure of the product.</p><p>Relo is still a concept, and its success would depend on coordination between tenants, landlords, or property managers. I believe there’s an opportunity to make moving a little easier while reducing unnecessary waste. If the product could help people save time, save money, and give usable furniture a second life, I’d consider that a meaningful outcome.</p></div>
+      </div>
+    <div class="next-project-row page-width">
+    <a class="next-project-link" href="../pathway-case-study/index.html" aria-label="Next project: PATHWAY">
+      <span>NEXT PROJECT</span>
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</section>
+  <footer class="footer">
+    <div class="footer-watermark" aria-hidden="true">
+      <svg class="footer-watermark-logo" viewBox="0 0 1024 1024" focusable="false">
+        <path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+        <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+        <circle cx="786" cy="455" r="36" fill="currentColor"/>
+      </svg>
+      <span>CATHERINE Y.</span>
+    </div>
+    <div class="footer-inner page-width">
+      <div class="footer-row footer-row--top">
+        <p>LET&apos;S CONNECT</p>
+        <div class="social-links">
+          <a href="mailto:sipheyy@gmail.com" aria-label="Email Catherine" title="sipheyy@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+          <span aria-label="LinkedIn link coming soon" title="LinkedIn link coming soon"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
+        </div>
+      </div>
+      <div class="footer-row footer-row--contact"><p>Base in the Bay Area</p></div>
+      <div class="footer-bottom-row"><p class="copyright">© 2026 Catherine Y. All rights reserved.</p><div class="footer-brand" aria-label="Catherine Y."><svg class="footer-brand-logo" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+  <path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+  <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+  <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+  <circle cx="786" cy="455" r="36" fill="currentColor"/>
+</svg><span>CATHERINE Y.</span></div></div>
+    </div>
+  </footer>
+  </main>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = () => {
+      mobileMenu.hidden = true;
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation menu');
+      menuButton.classList.remove('is-open');
+    };
+    menuButton?.addEventListener('click', () => {
+      const willOpen = mobileMenu.hidden;
+      mobileMenu.hidden = !willOpen;
+      document.body.classList.toggle('menu-open', willOpen);
+      menuButton.setAttribute('aria-expanded', String(willOpen));
+      menuButton.setAttribute('aria-label', willOpen ? 'Close navigation menu' : 'Open navigation menu');
+      menuButton.classList.toggle('is-open', willOpen);
+    });
+    mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !mobileMenu.hidden) closeMenu();
+    });
+
+    const caseIndex = document.querySelector('.case-index');
+    const indexToggle = caseIndex?.querySelector('.case-index__label');
+    const indexLinks = [...document.querySelectorAll('.case-index__nav a')];
+    let indexPinnedOpen = false;
+
+    const setIndexExpanded = (expanded) => {
+      if (!caseIndex) return;
+      caseIndex.classList.toggle('is-expanded', expanded);
+      indexToggle?.setAttribute('aria-expanded', String(expanded));
+    };
+
+    indexToggle?.addEventListener('click', () => {
+      indexPinnedOpen = !indexPinnedOpen;
+      caseIndex?.classList.toggle('is-pinned', indexPinnedOpen);
+      setIndexExpanded(indexPinnedOpen);
+    });
+
+    document.addEventListener('mousemove', (event) => {
+      if (!caseIndex || window.innerWidth < 769 || !caseIndex.classList.contains('is-visible') || indexPinnedOpen) return;
+      const inLeftTriggerZone = event.clientX <= 100;
+      const inIndexPanel = caseIndex.contains(event.target);
+      setIndexExpanded(inLeftTriggerZone || inIndexPanel);
+    }, { passive: true });
+
+    caseIndex?.addEventListener('mouseenter', () => {
+      if (!indexPinnedOpen) setIndexExpanded(true);
+    });
+
+    caseIndex?.addEventListener('mouseleave', () => {
+      if (!indexPinnedOpen) setIndexExpanded(false);
+    });
+    const indexSections = indexLinks
+      .map((link) => document.getElementById(link.dataset.indexTarget))
+      .filter(Boolean);
+    const hero = document.querySelector('.case-hero');
+
+    const updateIndex = () => {
+      if (!caseIndex || !hero || window.innerWidth < 769) return;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      const shouldShowIndex = heroBottom < window.innerHeight * 0.72;
+      caseIndex.classList.toggle('is-visible', shouldShowIndex);
+      if (!shouldShowIndex && !indexPinnedOpen) setIndexExpanded(false);
+
+      const markerY = Math.min(window.innerHeight * 0.34, 300);
+      let activeId = indexSections[0]?.id;
+      indexSections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= markerY) activeId = section.id;
+      });
+      indexLinks.forEach((link) => {
+        const active = link.dataset.indexTarget === activeId;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    indexLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        const target = document.getElementById(link.dataset.indexTarget);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    window.addEventListener('scroll', updateIndex, { passive: true });
+    window.addEventListener('resize', updateIndex);
+    updateIndex();
+  </script>
+</body>
+</html>

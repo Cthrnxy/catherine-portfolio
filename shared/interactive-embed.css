@@ -1,0 +1,21 @@
+/* Presentation inside the borderless case-study embed. */
+html,body{background:transparent;overflow:hidden}
+.page{padding-top:8px;padding-bottom:24px}
+/* Allow normal portfolio scrolling until the kiosk shows scrollable content. */
+.kiosk-viewport{overscroll-behavior:auto}
+#stage[data-scene="hospitality"] .kiosk-viewport,
+#stage[data-scene="detail"]:not([data-complete="true"]) .kiosk-viewport{overscroll-behavior:contain}
+
+/* Match the case-study heading hierarchy without changing project colors. */
+.page{max-width:1120px}
+.stage:has(.kiosk){width:100%;max-width:824px;margin-inline:auto}
+.screen-help h1{font-family:var(--guide-family,Archivo,Arial,sans-serif);font-size:var(--section-title-size);font-weight:var(--guide-weight,300);line-height:var(--guide-line-height,1.2);letter-spacing:var(--guide-spacing,0);min-height:0}
+@media(min-width:1121px){
+ .stage{--phone-width:250px;--screen-scale:0.641025641025641;--note-gap:36px;--card-width:min(260px,calc((100% - var(--phone-width) - 2*var(--note-gap))/2))}
+ .screen-help{right:calc(50% + 125px + 36px);width:min(260px,calc((100% - 250px - 72px)/2))}
+ .shell:has(.kiosk){grid-template-columns:220px minmax(0,1fr);gap:28px}
+ .shell:has(.kiosk) .screen-help{width:100%}
+ .stage:has(.kiosk){--note-width:240px}
+}
+
+@media(max-width:768px){.stage:has(.kiosk){max-width:440px}}
