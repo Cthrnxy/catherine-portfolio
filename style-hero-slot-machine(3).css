@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Nunito:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Cormorant+Garamond:wght@400;500&family=Nunito:wght@400;600&display=swap");
 
 :root {
   --ink: #020617;
@@ -167,7 +167,11 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
-.hero h1 { font-size: 70px; }
+.hero h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 70px;
+  font-weight: 500;
+}
 @keyframes hero-glow-drift {
   0% { transform: translateX(-50%) translate3d(-18px, -8px, 0) scale(1.02) rotate(-0.45deg); }
   31% { transform: translateX(-50%) translate3d(20px, 11px, 0) scale(1.05) rotate(0.35deg); }
@@ -223,10 +227,10 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   margin: 0;
   color: #b55f00;
   font-family: "Archivo", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: .14em;
+  font-size: 70px;
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
 }
 
 .project-card,
@@ -253,7 +257,6 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   letter-spacing: .14em;
 }
 .project-card > .project-label { margin-bottom: 32px; }
-.project-label--right { text-align: right; }
 .project-grid {
   display: grid;
   grid-template-columns: 504px 424px;
@@ -503,7 +506,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid rgb(37 99 235 / 55%);
     border-radius: 26px;
   }
   .about-copy { gap: 30px; }
-  .about h2 { font-size: 54px; }
+  .work-heading, .about h2 { font-size: 54px; }
   .about-art { width: 100%; height: auto; }
 
   .footer { margin-top: 92px; }
@@ -1183,9 +1186,8 @@ h6 {
   .footer-brand { display: none; }
 }
 
-/* Project labels: desktop alternates alignment; medium/small all left. */
+/* Project labels align with the image edge at all widths. */
 @media (max-width: 1120px) {
-  .project-label--right { text-align: left; }
   .project-card > .project-label { margin-bottom: 24px; }
 }
 
@@ -1216,17 +1218,13 @@ h6 {
    HOMEPAGE PROJECT CARD INTERACTION
    ========================================================= */
 
-/* WORK + project labels restored to the earlier lightweight label style. */
-.work-heading,
+/* Project labels retain their lightweight style beneath the larger WORK heading. */
 .project-label {
   font-family: "Archivo", Arial, sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
   line-height: 1.2 !important;
   letter-spacing: normal !important;
-}
-.work-heading {
-  color: #b55f00 !important;
 }
 
 /* Footer social glyphs stay white on the existing gradient circles. */

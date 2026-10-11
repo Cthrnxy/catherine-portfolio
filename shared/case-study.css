@@ -161,11 +161,11 @@ p + p { margin-top: var(--space-2); }
 
 .case-hero--pathway {
   --hero-title-width: min(70vw, 970px);
-  --hero-mockup-width: min(50vw, 650px);
+  --hero-mockup-width: min(54vw, 710px);
 }
 
 .case-hero--pathway .case-hero__mockup {
-  bottom: -10%;
+  bottom: -8%;
 }
 
 @media (max-width: 900px) {
@@ -181,7 +181,7 @@ p + p { margin-top: var(--space-2); }
 
   .case-hero--pathway {
     --hero-title-width: min(82vw, 720px);
-    --hero-mockup-width: min(67vw, 560px);
+    --hero-mockup-width: min(72vw, 600px);
   }
 }
 
@@ -198,7 +198,7 @@ p + p { margin-top: var(--space-2); }
 
   .case-hero--pathway {
     --hero-title-width: 86vw;
-    --hero-mockup-width: 84vw;
+    --hero-mockup-width: 90vw;
   }
 }
 
