@@ -163,7 +163,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .hero h1, .about h2 {
   margin: 0;
   font-family: "Archivo", Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
@@ -228,7 +228,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   color: #b55f00;
   font-family: "Archivo", Arial, sans-serif;
   font-size: 70px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
