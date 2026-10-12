@@ -1,5 +1,5 @@
-.solutions .solution--wide > .pathway-media{width:100%;aspect-ratio:auto;display:block;background:transparent;overflow:visible}
-.solutions .solution--wide .pathway-media img{display:block;width:100%;height:auto;max-width:100%;max-height:none}
+.solutions .solution--wide > .pathway-media{position:relative;width:100%;aspect-ratio:1254/1068;display:block;background:transparent;overflow:hidden}
+.solutions .solution--wide .pathway-media img{position:absolute;left:-9.569378%;top:-10.11236%;display:block;width:119.138756%;height:auto;max-width:none;max-height:none}
 @media(min-width:901px){
  .solutions .solution--wide{grid-template-columns:minmax(220px,3fr) minmax(0,7fr);gap:30px}
  .solutions .solution--wide:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(220px,3fr)}
