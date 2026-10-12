@@ -5,6 +5,11 @@
   let selected=null,hoverLocked=false,unlockTimer;
   function front(card){
    if(selected===card)return;
+   const previousImage=selected?.querySelector('img:not(.solution-stack-outgoing)');
+   clearTimeout(unlockTimer);
+   hoverLocked=false;
+   stack.querySelectorAll('.solution-stack-outgoing').forEach(image=>image.remove());
+   stack.querySelectorAll('.solution-stack-incoming').forEach(image=>image.classList.remove('solution-stack-incoming'));
    const deck=[...cards.filter(c=>c!==card),card];
    deck.forEach((c,slot)=>{
     const active=c===card;
@@ -13,10 +18,19 @@
     c.dataset.front=String(active);
     c.setAttribute('aria-pressed',String(active));
    });
-   if(selected){
+   if(selected&&!window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches){
     hoverLocked=true;
-    clearTimeout(unlockTimer);
-    unlockTimer=setTimeout(()=>{hoverLocked=false},520);
+    const outgoing=previousImage.cloneNode(true);
+    outgoing.className='solution-stack-outgoing';
+    outgoing.alt='';
+    outgoing.setAttribute('aria-hidden','true');
+    card.append(outgoing);
+    card.querySelector('img:not(.solution-stack-outgoing)').classList.add('solution-stack-incoming');
+    unlockTimer=setTimeout(()=>{
+     outgoing.remove();
+     card.querySelector('img').classList.remove('solution-stack-incoming');
+     hoverLocked=false;
+    },520);
    }
    selected=card;
   }
