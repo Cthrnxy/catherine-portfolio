@@ -173,7 +173,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   font-weight: 400;
 }
 .hero-title__line { display: block; white-space: nowrap; }
-.hero-title__primary { font-family: "Archivo", Arial, sans-serif; }
+.hero-title__primary { font-family: "Archivo", Arial, sans-serif; font-size: .86em; font-weight: 300; }
 .hero-title__secondary {
   margin-top: 12px;
   font-family: "Instrument Serif", Georgia, serif;

@@ -478,6 +478,7 @@ td { color: #aaa; font-size: 22px; }
 .persona .persona-photo {
   grid-area: photo;
   width: 100%;
+  height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;
