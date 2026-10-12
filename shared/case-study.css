@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300&family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,300&family=Roboto:wght@400;500&display=swap");
 
 /* Shared case-study system used by Onway, Relo, and Pathway. */
 :root {
@@ -471,7 +471,7 @@ td { color: #aaa; font-size: 22px; }
   grid-area: title;
   color: var(--persona-name-color);
   font-size: 36px;
-  font-weight: 300;
+  font-weight: 200;
 }
 .persona > img,
 .persona .persona-photo {
