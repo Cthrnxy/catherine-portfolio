@@ -261,7 +261,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   display: grid;
   grid-template-columns: minmax(0, 1.19fr) minmax(0, 1fr);
   align-items: center;
-  gap: 20px;
+  gap: 40px;
 }
 .project-grid--image-first { grid-template-columns: minmax(0, 1.19fr) minmax(0, 1fr); }
 .project-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; }
@@ -486,7 +486,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid rgb(37 99 235 / 55%);
   .project-card { min-height: 0; padding: 36px 24px 40px; border-radius: 26px; }
   .project-label { margin-bottom: 26px; font-size: 14px; }
   .project-grid,
-  .project-grid--image-first { display: flex; flex-direction: column; gap: 20px; align-items: stretch; }
+  .project-grid--image-first { display: flex; flex-direction: column; gap: 40px; align-items: stretch; }
   .project-copy,
   .project-card--relo .project-copy,
   .project-copy--onway { display: contents; }
@@ -1199,7 +1199,7 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 20px;
+    gap: 40px;
   }
   .project-copy,
   .project-card--relo .project-copy,
