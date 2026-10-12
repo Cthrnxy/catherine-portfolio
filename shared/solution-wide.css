@@ -1,2 +1,6 @@
-.solutions .solution--wide > .pathway-media{aspect-ratio:auto;display:block;background:transparent;overflow:visible}
+.solutions .solution--wide > .pathway-media{width:100%;aspect-ratio:auto;display:block;background:transparent;overflow:visible}
 .solutions .solution--wide .pathway-media img{display:block;width:100%;height:auto;max-width:100%;max-height:none}
+@media(min-width:901px){
+ .solutions .solution--wide{grid-template-columns:minmax(220px,3fr) minmax(0,7fr);gap:20px}
+ .solutions .solution--wide:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(220px,3fr)}
+}
