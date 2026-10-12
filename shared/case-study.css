@@ -1443,6 +1443,18 @@ body[data-project="pathway"] {
   --competitive-outer-color: var(--project-accent);
 }
 
+body[data-project="pathway"] .overview__copy { gap: 20px; }
+body[data-project="pathway"] .overview__copy p + p { margin-top: 0; }
+body[data-project="pathway"] .pain-list { margin-top: 32px; gap: 20px; }
+body[data-project="pathway"] .pain-list article { padding-top: 0; }
+body[data-project="pathway"] .persona { row-gap: 20px; }
+body[data-project="pathway"] .design-goal { padding-top: 80px; }
+
+@media (max-width: 768px) {
+  body[data-project="pathway"] .overview__copy { gap: 18px; }
+  body[data-project="pathway"] .overview__copy p + p { margin-top: 2px; }
+}
+
 
 /* =========================================================
    PRODUCTION POLISH
