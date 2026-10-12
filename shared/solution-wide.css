@@ -1,8 +1,8 @@
 .solutions .solution--wide > .pathway-media{position:relative;width:100%;aspect-ratio:1254/1068;display:block;background:transparent;overflow:hidden}
 .solutions .solution--wide .pathway-media img{position:absolute;left:-9.569378%;top:-10.11236%;display:block;width:119.138756%;height:auto;max-width:none;max-height:none}
 @media(min-width:1121px){
- .solutions .solution--wide{grid-template-columns:minmax(0,1fr) 546.42px;gap:30px}
- .solutions .solution--wide:nth-child(even){grid-template-columns:546.42px minmax(0,1fr)}
+ .solutions .solution--wide{grid-template-columns:minmax(0,1fr) 566.42px;gap:30px}
+ .solutions .solution--wide:nth-child(even){grid-template-columns:566.42px minmax(0,1fr)}
 }
 @media(min-width:901px) and (max-width:1120px){
  .solutions .solution--wide{grid-template-columns:minmax(220px,1fr) minmax(0,1.424537fr);gap:30px}
