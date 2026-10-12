@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Cormorant+Garamond:wght@400;500&family=Nunito:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Instrument+Serif&family=Nunito:wght@400;600&display=swap");
 
 :root {
   --ink: #020617;
@@ -168,9 +168,9 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   letter-spacing: -0.04em;
 }
 .hero h1 {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Instrument Serif", Georgia, serif;
   font-size: 70px;
-  font-weight: 500;
+  font-weight: 400;
 }
 @keyframes hero-glow-drift {
   0% { transform: translateX(-50%) translate3d(-18px, -8px, 0) scale(1.02) rotate(-0.45deg); }
@@ -259,11 +259,11 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .project-card > .project-label { margin-bottom: 32px; }
 .project-grid {
   display: grid;
-  grid-template-columns: 504px 424px;
+  grid-template-columns: minmax(0, 1.19fr) minmax(0, 1fr);
   align-items: center;
-  gap: 0;
+  gap: 20px;
 }
-.project-grid--image-first { grid-template-columns: 504px 424px; }
+.project-grid--image-first { grid-template-columns: minmax(0, 1.19fr) minmax(0, 1fr); }
 .project-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; }
 
 .project-card--relo .project-copy { gap: 50px; }
@@ -486,7 +486,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid rgb(37 99 235 / 55%);
   .project-card { min-height: 0; padding: 36px 24px 40px; border-radius: 26px; }
   .project-label { margin-bottom: 26px; font-size: 14px; }
   .project-grid,
-  .project-grid--image-first { display: flex; flex-direction: column; gap: 38px; align-items: stretch; }
+  .project-grid--image-first { display: flex; flex-direction: column; gap: 20px; align-items: stretch; }
   .project-copy,
   .project-card--relo .project-copy,
   .project-copy--onway { display: contents; }
@@ -1199,7 +1199,7 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 38px;
+    gap: 20px;
   }
   .project-copy,
   .project-card--relo .project-copy,
@@ -1331,9 +1331,6 @@ h6 {
   line-height: 1.45;
 }
 
-@media (min-width: 1121px) {
-  .project-card--pathway .project-grid { gap: 10px; }
-}
 
 
 /* Homepage project card accessibility and responsive CTA behavior. */
