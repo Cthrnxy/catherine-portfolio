@@ -1,5 +1,5 @@
-.program-stack{position:relative;isolation:isolate;width:100%;aspect-ratio:1}
-.program-screen{position:absolute;top:10%;width:80%;height:77.421875%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;touch-action:pan-y;border-radius:12px;background:#fff;box-shadow:0 8px 22px #153e2926;cursor:pointer;scrollbar-width:thin;scrollbar-color:#77988b #eaf2ed;transition:box-shadow .28s ease;z-index:1}
+.program-stack{position:relative;isolation:isolate;width:100%;aspect-ratio:1280/991}
+.program-screen{position:absolute;top:0;width:80%;height:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;touch-action:pan-y;border-radius:12px;background:#fff;box-shadow:0 8px 22px #153e2926;cursor:pointer;scrollbar-width:thin;scrollbar-color:#77988b #eaf2ed;transition:box-shadow .28s ease;z-index:1}
 .program-screen:first-child{left:0}
 .program-screen:nth-child(2){left:20%}
 .program-screen img{display:block;width:100%;height:auto;max-width:100%}
