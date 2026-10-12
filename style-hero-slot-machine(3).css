@@ -179,6 +179,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   margin-top: 12px;
   font-family: "Archivo", Arial, sans-serif;
   font-size: 50px;
+  font-weight: 300;
   letter-spacing: -0.02em;
 }
 @keyframes hero-glow-drift {
@@ -235,7 +236,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .work-heading {
   margin: 0;
   color: #b55f00;
-  font-family: "Archivo", Arial, sans-serif;
+  font-family: "Instrument Serif", Georgia, serif;
   font-size: var(--home-heading-size);
   font-weight: 400;
   line-height: 1.04;
@@ -330,7 +331,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   scroll-margin-top: 24px;
 }
 .about-copy { display: flex; flex-direction: column; gap: 24px; }
-.about h2 { color: var(--green); font-size: var(--home-heading-size); }
+.about h2 { color: var(--green); font-family: "Instrument Serif", Georgia, serif; font-size: var(--home-heading-size); }
 .about-copy p { margin: 0; font-size: 16px; line-height: 1.2; }
 .about-copy p + p { margin-top: 19px; }
 .about-art { width: 503px; height: 422px; object-fit: contain; }
