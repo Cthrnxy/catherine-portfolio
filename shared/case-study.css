@@ -16,7 +16,7 @@
   --space-10: 80px;
   --space-12: 96px;
   --space-14: 112px;
-  --section-space: clamp(72px, 8vw, 112px);
+  --section-space: 80px;
   --section-intro-gap: clamp(48px, 6vw, 80px);
   --content-gap: clamp(24px, 3vw, 40px);
   --card-gap: clamp(24px, 3vw, 32px);
@@ -210,7 +210,7 @@ p + p { margin-top: var(--space-2); }
   box-sizing: border-box;
   width: min(var(--case-max), calc(100% - (2 * var(--case-gutter))));
   margin-inline: auto;
-  padding: 50px 0;
+  padding: var(--section-space) 0 0;
   align-content: start;
 }
 
@@ -257,8 +257,7 @@ p + p { margin-top: var(--space-2); }
   justify-content: space-between;
   gap: 0;
 }
-.goal-list h3 { margin-bottom: 10px; color: var(--project-accent); font-size: 22px; font-weight: 300; line-height: 1.3; }
-body[data-project="pathway"] .goal-list article:first-child h3 { font-weight: 500; }
+.goal-list h3 { margin-bottom: 10px; color: var(--project-accent); font-size: 22px; font-weight: 500; line-height: 1.3; }
 
 @media (max-width: 769px) {
   .goal-list {
@@ -413,7 +412,7 @@ body[data-project="pathway"] .pathway-problem-media--plain img {
   object-fit: contain;
 }
 
-.research { padding-top: var(--space-10); }
+.research { padding-top: var(--section-space); }
 .competitive { margin-bottom: var(--space-12); }
 .competitive > p { max-width: var(--case-text); margin-bottom: var(--space-4); }
 .table-wrap { overflow: auto; border: 1px solid var(--competitive-outer-color); }
@@ -460,8 +459,9 @@ td { color: #aaa; font-size: 22px; }
 .persona {
   display: grid;
   grid-template-columns: 290px minmax(0, 1fr);
+  grid-template-rows: min-content 1fr auto;
   grid-template-areas: "photo title" "photo details" "quote quote";
-  gap: 22px 36px;
+  gap: 20px 36px;
   align-items: start;
 }
 .persona:nth-child(even) {
@@ -714,6 +714,7 @@ td { color: #aaa; font-size: 22px; }
 }
 
 @media (max-width: 768px) {
+  :root { --section-space: 64px; }
   .eyebrow,
   .case-label { margin-bottom: 20px; }
   .overview__grid,
@@ -763,6 +764,7 @@ td { color: #aaa; font-size: 22px; }
   .persona,
   .persona:nth-child(even) {
     grid-template-columns: minmax(0, 1fr) 180px;
+    grid-template-rows: auto auto auto;
     grid-template-areas: "title photo" "details details" "quote quote";
     gap: 20px 16px;
   }
@@ -798,6 +800,7 @@ td { color: #aaa; font-size: 22px; }
   .persona,
   .persona:nth-child(even) {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas: "title" "photo" "details" "quote";
   }
   .persona > h3,
@@ -1447,8 +1450,6 @@ body[data-project="pathway"] .overview__copy { gap: 20px; }
 body[data-project="pathway"] .overview__copy p + p { margin-top: 0; }
 body[data-project="pathway"] .pain-list { margin-top: 32px; gap: 20px; }
 body[data-project="pathway"] .pain-list article { padding-top: 0; }
-body[data-project="pathway"] .persona { row-gap: 20px; }
-body[data-project="pathway"] .design-goal { padding-top: 80px; }
 
 @media (max-width: 768px) {
   body[data-project="pathway"] .overview__copy { gap: 18px; }
