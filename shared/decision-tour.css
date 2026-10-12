@@ -50,3 +50,23 @@ button:focus-visible,.tour-viewport:focus-visible{outline:3px solid var(--accent
 @media(max-width:1120px){.decision-tour{padding:40px;gap:36px;grid-template-columns:minmax(0,1fr) minmax(240px,.9fr)}.tour-device{width:min(290px,100%)}.tour-title{font-size:30px;margin-bottom:32px}.decision-tour[data-theme=pathway]{padding:32px;gap:28px;grid-template-columns:minmax(200px,.65fr) minmax(0,1.35fr)}}
 @media(max-width:768px){.page{padding:24px 16px}.decision-tour,.decision-tour[data-theme=pathway]{padding:28px 24px;grid-template-columns:1fr;gap:32px;border-radius:20px}.tour-title{font-size:28px;margin-bottom:28px}.tour-details-title{font-size:23px;margin-bottom:20px}.tour-notes{gap:20px}.tour-note h3{font-size:18px}.tour-device{width:min(310px,100%)}.tour-guidance{margin-top:20px}.tour-eyebrow{font-size:12px;margin-bottom:14px}.tour-marker{width:22px;height:22px;font-size:11px}.tour-tap{padding:6px 8px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.tour-screen.is-entering,.tour-hotspot.is-flashing{animation:none}}
+
+/* Interaction polish shared by Onway, Relo and Pathway */
+.tour-notes{animation:tour-notes-in .55s .28s both}
+@keyframes tour-notes-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.tour-hotspot{transition:background-color .2s ease,box-shadow .2s ease;animation:tour-hotspot-pulse 2.4s ease-in-out infinite}
+.tour-hotspot:focus-visible{outline:3px solid var(--accent);outline-offset:2px;animation:none}
+@keyframes tour-hotspot-pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 25%,transparent)}50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 0%,transparent)}}
+.tour-tap{animation:tour-tap-in .4s .45s both}
+@keyframes tour-tap-in{from{opacity:0;transform:translate(-50%,5px)}to{opacity:1;transform:translate(-50%,0)}}
+.tour-note h3,.tour-note p{overflow-wrap:anywhere}
+@media(max-width:768px){
+ .decision-tour,.decision-tour[data-theme=pathway]{gap:24px}
+ .tour-guidance{font-size:14px;line-height:1.5}
+ .tour-pagination{margin-top:24px}
+ .tour-page-button{width:44px;height:44px}
+ .tour-status{line-height:1.5}
+}
+@media(prefers-reduced-motion:reduce){
+ .tour-notes,.tour-hotspot,.tour-tap{animation:none!important;transition:none!important}
+}
