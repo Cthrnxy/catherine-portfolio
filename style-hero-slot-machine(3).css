@@ -173,10 +173,11 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   font-weight: 400;
 }
 .hero-title__line { display: block; white-space: nowrap; }
-.hero-title__primary { font-family: "Archivo", Arial, sans-serif; font-size: .86em; font-weight: 300; }
+.hero-title__primary { font-family: "Instrument Serif", Georgia, serif; font-size: .86em; font-weight: 400; }
 .hero-title__secondary {
   margin-top: 12px;
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: "Archivo", Arial, sans-serif;
+  font-size: .85em;
   letter-spacing: -0.02em;
 }
 @keyframes hero-glow-drift {
@@ -486,6 +487,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid rgb(37 99 235 / 55%);
   }
   .hero-content { padding: 78px 0 76px; }
   .hero h1 { font-size: clamp(32px, 12.5vw, 52px); }
+  .hero-title__secondary { font-size: clamp(28px, 9.2vw, 52px); }
   .hero-content > p { width: 100%; margin-top: 28px; font-size: 20px; line-height: 1.3; }
   .explore-link { margin-top: 96px; font-size: 13px; }
 
