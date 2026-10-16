@@ -174,8 +174,9 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   font-weight: 400;
 }
 .hero-title__line { display: block; white-space: nowrap; }
-.hero-title__primary { font-family: "Instrument Serif", Georgia, serif; font-size: var(--home-heading-size); font-weight: 400; color: #33343a; }
+.hero-title__primary { font-family: "Instrument Serif", Georgia, serif; font-size: var(--home-heading-size); font-weight: 400; color: var(--primary-text); }
 .hero-title__secondary {
+  color: var(--orange);
   margin-top: 12px;
   font-family: "Archivo", Arial, sans-serif;
   font-size: 40px;
