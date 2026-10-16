@@ -295,22 +295,22 @@
         }, 900);
       }
 
-      const alignSlotWithBody = () => {
+      const alignSlotWithName = () => {
         const heroContent = document.querySelector('.hero-content');
-        const heroBody = heroContent?.querySelector(':scope > p');
+        const heroName = heroContent?.querySelector('.hero-title__primary');
         const heroSlot = document.querySelector('.hero-slot');
-        if (!heroContent || !heroBody || !heroSlot) return;
+        if (!heroContent || !heroName || !heroSlot) return;
 
-        if (window.matchMedia('(min-width: 1101px)').matches) {
-          const bodyBottom = heroBody.offsetTop + heroBody.offsetHeight;
-          heroSlot.style.top = `${bodyBottom - heroSlot.offsetHeight}px`;
+        if (window.matchMedia('(min-width: 1121px)').matches) {
+          const nameTop = heroName.getBoundingClientRect().top - heroContent.getBoundingClientRect().top;
+          heroSlot.style.top = `${nameTop + (heroName.offsetHeight - heroSlot.offsetHeight) / 2}px`;
         } else {
           heroSlot.style.removeProperty('top');
         }
       };
 
-      requestAnimationFrame(alignSlotWithBody);
-      document.fonts?.ready.then(alignSlotWithBody);
+      requestAnimationFrame(alignSlotWithName);
+      document.fonts?.ready.then(alignSlotWithName);
 
       let slotResizeFrame;
       window.addEventListener('resize', () => {
@@ -322,7 +322,7 @@
             reel.style.transition = 'none';
             reel.style.transform = `translateY(${-currentPositions[index] * itemHeight}px)`;
           });
-          alignSlotWithBody();
+          alignSlotWithName();
         });
       });
 const defaultTheme = document.body.dataset.project || 'hero';
