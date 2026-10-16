@@ -20,6 +20,9 @@ body .stage,body.kiosk-project .stage {
  line-height:var(--case-heading-line-height,1.2);letter-spacing:var(--case-heading-spacing,normal);
  color:var(--case-heading-color,var(--accent,var(--relo-green)));
 }
+/* Keep annotation copy and interaction guidance readable at every breakpoint. */
+.stage .annotation-copy p,
+.stage .screen-guide { font-size:16px; }
 @media(min-width:901px) {
  body .stage {height:auto;min-height:700px;}
  /* The section label spans both columns; artwork starts on the next row. */
