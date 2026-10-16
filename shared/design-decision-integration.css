@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+/* The surrounding case study owns section width and title typography. */
+@font-face { font-family:Archivo;src:url("fonts/archivo-0e094a7d3c7c.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap; }
+html,body { background:transparent; }
+body { font-family:Archivo,"Helvetica Neue",Arial,sans-serif; }
+body .stage,body.kiosk-project .stage {
+ width:var(--case-stage-width,min(1060px,calc(100% - 48px)));
+ margin:0 auto;padding:0;background:transparent;
+ overflow:visible;scrollbar-gutter:auto;
+}
+.stage .eyebrow {
+ font-family:var(--case-label-family,"Roboto",sans-serif);
+ font-size:var(--case-label-size,16px);font-weight:var(--case-label-weight,400);
+ line-height:var(--case-label-line-height,1.5);letter-spacing:var(--case-label-spacing,.02em);
+ text-transform:var(--case-label-transform,uppercase);color:var(--case-label-color,var(--eyebrow,var(--relo-brown)));
+}
+.stage .main-title {
+ font-family:var(--case-heading-family,Archivo,sans-serif);
+ font-size:var(--case-heading-size,clamp(30px,3.15vw,40px));font-weight:var(--case-heading-weight,400);
+ line-height:var(--case-heading-line-height,1.2);letter-spacing:var(--case-heading-spacing,normal);
+ color:var(--case-heading-color,var(--accent,var(--relo-green)));
+}
+@media(min-width:901px) {
+ body .stage {height:auto;min-height:700px;}
+ .stage .design-layout {min-height:664px;}
+}
+@media(max-width:900px) {
+ body .stage {height:auto;min-height:0;}
+ .stage .design-layout {min-height:0;}
+ .stage .screen-guide {width:var(--case-stage-width,calc(100vw - 48px));}
+ .kiosk-project .stage .screen-guide {width:100%;}
+ .stage .main-title {margin-bottom:20px;}
+ .stage .eyebrow {margin-bottom:16px;}
+}

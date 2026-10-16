@@ -1,2 +1,404 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>relo · Design decisions</title><link rel="stylesheet" href="../../shared/decision-tour.css?v=numbered-tour-1"></head><body><main class="page"><section class="decision-tour" aria-label="relo interactive design decisions"><div class="tour-copy"><p class="tour-eyebrow">DESIGN DECISIONS</p><h1 class="tour-title">A closer look at the decisions on each screen</h1><h2 class="tour-details-title">Design details</h2><ol class="tour-notes" aria-live="polite"></ol><p class="tour-guidance" aria-live="polite"></p><button class="tour-restart" type="button">Restart</button></div><div class="tour-visual"><div class="tour-device"><div class="tour-viewport" tabindex="0" role="region"><div class="tour-surface"><img class="tour-screen" alt="" draggable="false"><div class="tour-controls"></div><div class="tour-markers" aria-hidden="true"></div></div></div></div><nav class="tour-pagination" aria-label="Screen navigation"><button class="tour-page-button" data-tour-prev type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span class="tour-count" aria-live="polite"></span><button class="tour-page-button" data-tour-next type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button></nav><p class="tour-status" aria-live="polite"></p></div></section></main><script src="../../shared/decision-tour.js?v=numbered-tour-1"></script><script src="app.js?v=numbered-tour-1"></script><script src="../../shared/interactive-embed-child.js"></script></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relo — Design decisions · Mobile guidance slot — Centered content and bottom actions</title><style>:root { --relo-brown:#924900; --relo-green:#064e3b; --relo-orange:#f39c45; --relo-gray:#d9d9d9; }
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+html { color-scheme:light; }
+body { margin:0; background:#f5f4f0; color:#171715; font-family:Archivo,"Helvetica Neue",Arial,sans-serif; }
+button { font:inherit; cursor:pointer; }
+button:focus-visible { outline:3px solid var(--relo-green); outline-offset:3px; }
+.stage { width:min(1210px,calc(100% - 40px)); margin:24px auto; padding:clamp(28px,5vw,66px); background:white; }
+.design-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,390px); grid-template-rows:auto 1fr; grid-template-areas:"header phone" "details phone"; gap:0 clamp(34px,6vw,108px); align-items:start; }
+.eyebrow { font-weight:700; font-size:14px; letter-spacing:.025em; color:var(--relo-brown); margin:0 0 48px; min-height:18px; }
+.main-title { max-width:500px; color:var(--relo-green); font-weight:500; font-size:clamp(32px,3.4vw,42px); letter-spacing:-.035em; line-height:1.1; margin:0 0 clamp(60px,6.5vw,100px); }
+.details-heading,.completion-panel .screen-guide { color:var(--relo-green); font-size:clamp(22px,2.3vw,28px); font-weight:500; letter-spacing:-.02em; line-height:1.2; margin:0 0 28px; }
+.annotation { display:flex; gap:18px; align-items:flex-start; width:min(100%,485px); }
+.annotation.fade-in { animation:annotation-entrance .48s ease-out both; }
+@keyframes annotation-entrance { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.annotation-number { display:grid; place-items:center; flex:0 0 30px; width:30px; height:30px; border-radius:100%; background:var(--relo-brown); color:#fff; font-size:16px; font-weight:700; }
+.annotation-copy h3 { margin:1px 0 8px; font-size:clamp(17px,1.7vw,20px); line-height:1.2; font-weight:600; color:var(--relo-green); }
+.annotation-copy p { font-size:14.5px; line-height:1.4; margin:0; }
+.action-button { min-width:207px; min-height:52px; padding:10px 27px; border:0; border-radius:8px; box-shadow:0 3px 6px #0002; background:var(--relo-brown); color:#fff; font-size:20px; font-weight:600; }
+.action-button:hover { background:#7a3d00; }
+.screen { display:block; width:100%; height:100%; object-fit:fill; user-select:none; }
+.screen.appear { animation:screen-entrance .29s ease-out both; }
+@keyframes screen-entrance { from{opacity:.55;}to{opacity:1;} }
+.hotspot { position:absolute; z-index:4; padding:0; border:1px solid #c7772766; border-radius:var(--hot-radius,14px); background:rgb(243 156 69 / 77%); animation:hotspot-pulse 2s ease-in-out infinite; }
+.hotspot:hover { background:rgb(243 156 69 / 88%); }
+.hotspot-tip { position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); background:#fff; color:var(--relo-brown); padding:9px 11px; border-radius:7px; box-shadow:0 2px 7px #0003; font-size:10px; font-weight:800; line-height:1; letter-spacing:.02em; white-space:nowrap; pointer-events:none; display:flex; gap:5px; align-items:center; }
+.hotspot-tip::before { content:""; position:absolute; top:-5px; left:calc(50% - 5px); width:10px; height:10px; transform:rotate(45deg); background:#fff; }
+.tap-icon { width:13px; height:17px; display:block; position:relative; }
+.marker { position:absolute; z-index:1; width:42px; height:42px; border-radius:50%; background:var(--relo-brown); color:white; display:grid; place-items:center; transform:translate(-50%,-50%); pointer-events:none; font-size:19px; line-height:1; font-weight:700; box-shadow:0 3px 7px #0003; }
+.marker.fade-in { animation:marker-entrance .48s ease-out both; }
+@keyframes marker-entrance { from{opacity:0}to{opacity:1} }
+.progress { margin-top:clamp(25px,4vw,54px); width:100%; }
+.bars { display:grid; gap:9px; width:100%; }
+.bar { min-width:0; height:10px; border-radius:50px; background:var(--relo-gray); transition:background .3s ease; }
+.bar.active { background:var(--relo-brown); }
+.sr-only { border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;width:1px; }
+@media (min-width:901px) and (max-width:1120px) {
+  .main-title { font-size:clamp(28px,3vw,34px); }
+  .details-heading,.completion-panel .screen-guide { font-size:clamp(20px,2.2vw,24px); }
+  .annotation-copy p { font-size:14px; }
+  .marker { width:34px; height:34px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .screen.appear,.annotation.fade-in,.marker.fade-in,.hotspot { animation:none!important }
+  .bar { transition:none!important }
+}
+.phone-column { grid-area:phone; min-width:0; justify-self:center; width:min(100%, 340px); }
+.phone { position:relative; isolation:isolate; background:#fff7e9; width:100%; max-width:none; aspect-ratio:390 / 844; container-type:inline-size; }
+.phone .screen { width:100%; height:100%; }
+.phone .hotspot { border-width:.25641026cqw; }
+@keyframes hotspot-pulse { 0%,100% { box-shadow:0 0 0 0 rgb(243 156 69 / 30%); }
+  50% { box-shadow:0 0 0 1.28205128cqw rgb(243 156 69 / 0%); } }
+@font-face { font-family:ArchivoMobile;src:url("../../shared/fonts/archivo-0e094a7d3c7c.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap }
+.relo-project .phone-column { position:relative; }
+.screen-guide { border:0; clip:auto; height:auto; margin:8px 0 0; overflow:visible; padding:0; position:absolute; top:100%; left:0; white-space:normal; width:100%; text-align:center; color:var(--relo-green); font-size:13px; font-weight:500; line-height:1.35; }
+.kiosk-project .screen-guide { width:calc(100% - 10px); }
+#marker-layer { position:absolute; inset:0; z-index:20; pointer-events:none; }
+.phone[aria-busy="true"] #marker-layer { visibility:hidden; }
+.heading { grid-area:header; padding-top:0; }
+.details { grid-area:details; min-width:0; display:flex; flex-direction:column; align-items:start; min-height:0; }
+.actions { margin-top:clamp(52px,6vw,95px); display:flex; flex-direction:column; align-items:start; gap:12px; min-height:0; }
+.phone .marker { width:10.76923077cqw; height:10.76923077cqw; box-shadow:0 .76923077cqw 1.79487179cqw #0003; font-size:clamp(12px,4.87179487cqw,16px); }
+.kiosk-project .phone .marker { font-size:clamp(10px,1.87cqw,20px); }
+.phone .hotspot-tip { top:calc(100% + 2.05128205cqw); border-radius:1.79487179cqw; box-shadow:0 .51282051cqw 1.79487179cqw #0003; isolation:isolate; z-index:1; font-size:10.5px; padding:6px 8px; gap:4px; }
+.phone .hotspot-tip::before { z-index:-1; top:-4px; left:calc(50% - 4px); width:8px; height:8px; }
+.phone .hotspot.tip-above .hotspot-tip { top:auto; bottom:calc(100% + 6px); }
+.phone .hotspot.tip-above .hotspot-tip::before { top:auto; bottom:-4px; }
+.phone .hotspot.tip-left .hotspot-tip { left:0; transform:none; }
+.phone .hotspot.tip-right .hotspot-tip { left:auto; right:0; transform:none; }
+.phone .tap-icon { width:clamp(10px,3.33333333cqw,13px); height:clamp(13px,4.35897436cqw,17px); }
+.hotspot::after { content:""; position:absolute; left:var(--touch-left,0px); top:var(--touch-top,0px); width:var(--touch-width,100%); height:var(--touch-height,100%); background:transparent; }
+@media(min-width:901px) {
+  .stage { width:min(1210px,calc(100% - 32px)); margin:12px auto; padding:24px 32px; }
+  .design-layout { grid-template-columns:minmax(0,1fr) minmax(0,300px); column-gap:clamp(28px,4vw,64px); }
+  .eyebrow { margin-bottom:20px; }
+  .main-title { margin-bottom:28px; }
+  .details-heading,.completion-panel .screen-guide { margin-bottom:18px; }
+  .actions { margin-top:14px; }
+  .phone-column { width:min(100%,270px); }
+  .kiosk-project .phone-column { width:min(100%,740px); max-width:740px; }
+  .screen-guide { margin-top:14px; }
+  .progress { margin-top:28px; }
+  .bars { gap:7px; }
+  .bar { height:8px; }
+}
+
+
+.completion-panel { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; width:100%; gap:14px; }
+.completion-panel > .details-heading,.completion-panel > .screen-guide { grid-column:1; grid-row:1; min-width:0; overflow-wrap:break-word; }
+.completion-panel > .actions { grid-column:2; grid-row:1; align-self:center; }
+.completion-panel .details-heading { margin:0; }
+.completion-panel .actions { margin:0; min-height:0; }
+@media(max-width:1120px) {
+  .action-button { width:116px; min-width:116px; max-width:100%; height:36px; min-height:36px; padding:8px 12px; border-radius:8px; font-size:13px; line-height:20px; }
+}
+
+/* Desktop and middle widths keep the same 700px section across every step. Mobile stays content-sized. */
+@media(min-width:901px) {
+ .stage.action-ready .screen-guide { display:none; }
+ .stage { height:700px; margin-top:0; margin-bottom:0; overflow-y:auto; overscroll-behavior-y:contain; scrollbar-gutter:stable; }
+ /* Center the title and design notes together, with guidance/actions in a separate bottom row. */
+ .design-layout {
+  min-height:calc(100% - 36px);
+  grid-template-rows:auto minmax(0,1fr) auto auto auto minmax(0,1fr) auto;
+  grid-template-areas:"eyebrow phone" ". phone" "title phone" "details-title phone" "annotations phone" ". phone" "completion phone";
+ }
+ .heading,.details { display:contents; }
+ .eyebrow { grid-area:eyebrow; }
+ .main-title { grid-area:title; }
+ .details > .details-heading { grid-area:details-title; }
+ .details > .annotation,.details > .annotation-list { grid-area:annotations; }
+ .completion-panel { grid-area:completion; align-self:end; margin-top:0; padding-top:18px; }
+ .completion-panel .screen-guide { position:static; top:auto; left:auto; transform:none; width:100%; margin:0; text-align:left; }
+}
+
+@media(max-width:900px) {
+  .relo-project { font-family:ArchivoMobile,"Helvetica Neue",Arial,sans-serif; }
+  .stage { --mobile-device-width:220px; width:100%; margin:0; padding:12px 14px; }
+  .design-layout,.kiosk-project .design-layout { grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto auto; grid-template-areas:"header" "phone" "progress" "details"; gap:0; }
+  .heading { scroll-margin-top:12px; }
+  .eyebrow { font-size:12px; line-height:1.2; min-height:18px; margin:0 0 6px; }
+  .main-title { font-size:24px; line-height:1.12; margin:0 0 10px; max-width:570px; }
+  .phone-column { width:min(100%,var(--mobile-device-width)); }
+  .details { padding-top:8px; }
+  .details-heading,.completion-panel .screen-guide { font-size:18px; line-height:1.2; margin:0 0 8px; }
+  .completion-panel { gap:10px; }
+  .completion-panel .details-heading { min-width:0; }
+  .completion-panel .actions { align-self:center; }
+  .details.action-ready > .annotation,.details.action-ready > .annotation-list:not(:empty) { margin-top:8px; }
+  .annotation-list { gap:8px; }
+  .annotation { gap:10px; }
+  .annotation-number { width:22px; height:22px; flex-basis:22px; font-size:12px; }
+  .annotation-copy { min-width:0; }
+  .annotation-copy h3 { font-size:15px; line-height:1.25; margin:0 0 4px; }
+  .annotation-copy p { font-size:13px; line-height:1.38; }
+  .actions { margin-top:10px; }
+  .action-button { position:relative; }
+  .progress { grid-area:progress; margin-top:8px; margin-bottom:0; }
+  .phone .marker { width:10.76923077cqw; height:10.76923077cqw; }
+  .phone .hotspot-tip { top:calc(100% + 6px); border-radius:6px; line-height:1; }
+  .hotspot::after { z-index:0; }
+  .kiosk-project .phone-column { width:94%; max-width:340px; padding-right:10px; align-self:start; }
+  .kiosk-project .phone .marker { width:clamp(18px,3.93cqw,42px); height:clamp(18px,3.93cqw,42px); }
+  /* Keep a two-line guidance slot even when its message is visually absent. */
+  .screen-guide { position:relative; top:auto; left:50%; transform:translateX(-50%); width:calc(100vw - 28px); margin:14px 0 0; font-size:12px; line-height:1.35; min-height:2.7em; display:flex; align-items:center; justify-content:center; }
+  .stage.action-ready .screen-guide { visibility:hidden; }
+  .kiosk-project .screen-guide { left:0; transform:none; width:100%; }
+  .action-button::after { content:""; position:absolute; inset:-2px 0; background:transparent; }
+  .bars { gap:6px; }
+  .bar { height:7px; }
+  .scroll-hint { font-size:11px; bottom:6px; padding:6px 10px; }
+}
+@media(max-width:900px) and (max-height:720px) {
+  .stage { --mobile-device-width:200px; }
+}
+@media(max-width:900px) and (max-height:600px) {
+  .stage { --mobile-device-width:190px; }
+}
+</style><link rel="stylesheet" href="../../shared/design-decision-integration.css?v=20261016-1">
+<script src="../../shared/design-decision-integration.js?v=20261016-1" defer></script></head>
+<body class="phone-project relo-project"><main class="stage" id="stage" tabindex="0" aria-label="Interactive Relo design decisions">
+  <section class="design-layout" id="design-layout">
+    <header class="heading" id="decision-heading"><p class="eyebrow">DESIGN DECISIONS</p><h1 id="main-title" class="main-title">A closer look at the decisions on each screen</h1></header>
+    <div class="details" id="decision-details"><h2 id="details-heading" class="details-heading">Design details (Flow 1)</h2>
+      <div id="annotation" class="annotation" aria-label="Design decision annotation"><span class="annotation-number" aria-hidden="true">1</span><div class="annotation-copy"><h3 id="annotation-title"></h3><p id="annotation-text"></p></div></div>
+      <div class="actions" id="actions"><button id="next-flow" class="action-button" type="button" hidden>Next Flow</button><button id="restart" class="action-button" type="button" hidden>Restart</button></div><div class="completion-panel" id="completion-panel" hidden></div>
+    </div>
+    <div class="phone-column" id="phone-column"><div class="phone" id="phone"><img id="screen-img" class="screen" draggable="false" alt="Relo application screen"><div id="marker-layer"></div><button id="hotspot" class="hotspot" type="button" aria-label="Continue guided interaction" aria-describedby="screen-guide"><span class="hotspot-tip" aria-hidden="true"><svg class="tap-icon" viewBox="0 0 20 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 12V3a1.5 1.5 0 0 1 3 0v7l2-1 3 1 2 2v7l-3 4H8l-5-8a1.4 1.4 0 0 1 2-2l3 3"/></svg>TAP HERE</span></button></div><p id="screen-guide" class="screen-guide" aria-live="polite">Click the screen to find interactive areas</p></div>
+  </section>
+  <footer class="progress" id="flow-progress"><div id="bars" class="bars" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-label="Flow 1 progress"></div><span id="live-status" class="sr-only" aria-live="polite"></span></footer>
+</main><script>const IMAGE_DATA=["assets/screen-0e27e4c3f746.webp","assets/screen-1d75993adb2e.webp","assets/screen-0e27e4c3f746.webp","assets/screen-bcee2ee0ea81.webp","assets/screen-f02a65d71cb7.webp","assets/screen-0e27e4c3f746.webp","assets/screen-008735e03571.webp","assets/screen-89a9be2aea02.webp","assets/screen-b69552388238.webp","assets/screen-722f022a17e6.webp"];
+'use strict';
+const images=IMAGE_DATA;
+const noteText={
+ cards:{title:'Current / Next Unit cards',text:"Separates where users are living (current unit) from where they'll be living in the future (next unit)."},
+ switch:{title:'Current / Next switch',text:'Consistent positioning and visual states help users instantly identify their current location and avoid confusion when switching between moving-in and moving-out contexts.'},
+ approval:{title:'Be Approved process',text:'Users confirm landlord approval without third-party participation. Approval unlocks direct transfers; otherwise, users continue through the marketplace.'}
+};
+// The sequence and positions are drawn from the user's ten separate Figma slides.
+const steps=[
+ {slide:'Slide 1',image:0, note:'cards', markers:[[337,213]],hotspot:{rect:[130,686,131,40],next:1,label:'Switch to Next Unit'}},
+ {slide:'Slide 4',image:1, note:'cards', markers:[[348,198]],hotspot:{rect:[130,686,131,40],next:2,label:'Switch back to Current Unit'}},
+ {slide:'Slide 6',image:2, note:null, markers:[],hotspot:{rect:[23.3,747,74,74],next:3,label:'Open Explore'}},
+ {slide:'Slide 7',image:3, note:'switch', markers:[[294,709]],hotspot:{rect:[129.5,690,131,40],next:4,label:'Switch Explore to next location'}},
+ {slide:'Slide 8',image:4, note:'switch', markers:[[302,704]],hotspot:{rect:[109,748,74,74],next:5,label:'Return to Home'}},
+ {slide:'Slide 9',image:5, note:null, markers:[],hotspot:null},
+ {slide:'Slide 10',image:6, note:'approval',markers:[[360,325],[360,619]],hotspot:{rect:[23,304,20,20],next:7,label:'Confirm landlord approval for current unit'}},
+ {slide:'Slide 11',image:7, note:'approval',markers:[[360,325],[360,619]],hotspot:{rect:[23,598,20,20],next:8,label:'Confirm landlord approval for next unit'}},
+ {slide:'Slide 12',image:8, note:'approval',markers:[[360,325],[360,619]],hotspot:{rect:[21,751,347,42],next:9,label:'Save approval and continue'}},
+ {slide:'Slide 13',image:9, note:null,markers:[],hotspot:null}
+];
+let stepIndex=0;
+let lastNote=null;
+let lastFlow=null;
+const el=id=>document.getElementById(id);
+const stage=el('stage');
+const screen=el('screen-img');
+const hotspot=el('hotspot');
+const markerGroup=el('marker-layer');
+const annotation=el('annotation');
+const progress=el('bars');
+
+function updateNote(key,animate){
+ if (!key){ annotation.hidden=true; annotation.classList.remove('fade-in'); return; }
+ annotation.hidden=false;
+ if (key!==lastNote){
+  el('annotation-title').textContent=noteText[key].title;
+  el('annotation-text').textContent=noteText[key].text;
+  annotation.classList.remove('fade-in');
+  if (animate){ void annotation.offsetWidth; annotation.classList.add('fade-in'); }
+ } else {
+  // Keep the existing annotation in place without replaying its entrance.
+  annotation.classList.remove('fade-in');
+ }
+}
+function updateMarkers(coords,animate){
+ const signatures=JSON.stringify(coords);
+ const previous=markerGroup.dataset.anchors;
+ if (signatures===previous) return;
+ markerGroup.replaceChildren();
+ for (const [x,y] of coords){
+  const marker=document.createElement('span');marker.className='marker';
+  marker.textContent='1';marker.setAttribute('aria-hidden','true');
+  marker.style.left=x/390*100+'%';marker.style.top=y/844*100+'%';
+  if(animate)marker.classList.add('fade-in');
+  markerGroup.append(marker);
+ }
+ markerGroup.dataset.anchors=signatures;
+}
+function updateProgress(flow,within){
+ const total=flow===1?6:4;
+
+ if(lastFlow!==flow){
+  progress.replaceChildren();
+  progress.style.gridTemplateColumns='repeat('+total+',minmax(0,1fr))';
+  for(let n=0;n<total;n++){let bar=document.createElement('span');bar.className='bar';bar.setAttribute('aria-hidden','true');progress.append(bar);}
+ }
+ Array.from(progress.children).forEach((bar,i)=>bar.classList.toggle('active',i<=within));
+ progress.setAttribute('aria-label','Flow '+flow+', step '+(within+1)+' of '+total);
+ progress.setAttribute('aria-valuemin','1');
+ progress.setAttribute('aria-valuemax',String(total));
+ progress.setAttribute('aria-valuenow',String(within+1));
+ lastFlow=flow;
+}
+function showStep(nextIndex,options={}){
+ if(nextIndex<0||nextIndex>=steps.length)return;
+ const prior=steps[stepIndex];
+ const step=steps[nextIndex];
+ const flow=nextIndex<6?1:2;
+ const within=flow===1?nextIndex:nextIndex-6;
+ const changedNote=lastNote!==step.note;
+ stepIndex=nextIndex;
+ stage.dataset.flow=String(flow);
+ stage.dataset.step=String(within+1);
+ stage.dataset.slide=step.slide;
+ const changedImage=screen.dataset.image!==String(step.image);
+ if(changedImage){
+  screen.classList.remove('appear');
+  screen.src=images[step.image];
+  screen.dataset.image=String(step.image);
+  if(nextIndex!==0){void screen.offsetWidth;screen.classList.add('appear');}
+ }
+ // Only new annotation content animates. It is visible immediately on Slide 1.
+ updateNote(step.note,changedNote&&nextIndex!==0);
+ updateMarkers(step.markers,changedNote&&nextIndex!==0);
+ lastNote=step.note;
+ if(step.hotspot){
+  hotspot.hidden=false;
+  const [x,y,w,h]=step.hotspot.rect;
+  Object.assign(hotspot.style,{left:(x/390*100)+'%',top:(y/844*100)+'%',width:(w/390*100)+'%',height:(h/844*100)+'%'});
+  hotspot.style.setProperty('--hot-radius',(w<=25?4: w<90?12:16)/390*100+'cqw');
+  hotspot.setAttribute('aria-label',step.hotspot.label);
+ }else hotspot.hidden=true;
+ el('next-flow').hidden=nextIndex!==5;
+ el('restart').hidden=nextIndex!==9;
+ updateProgress(flow,within);
+ el('live-status').textContent='Flow '+flow+', step '+(within+1)+(nextIndex===9?', completed':'');
+ el('screen-guide').textContent=step.hotspot?step.hotspot.label:nextIndex===5?'Flow 1 completed':'All flows completed';
+ refreshMobileUI(options);
+}
+
+// Mobile-only viewport and touch helpers. They preserve original image coordinates.
+let mobileViewFrame=null,mobileViewRevision=0;
+const mobileMode=()=>matchMedia('(max-width:900px)').matches;
+function mobileVisibleHeight(){return window.designDecisionViewportHeight || (window.visualViewport?window.visualViewport.height:window.innerHeight);}
+
+function updateMobileSizing(){
+ if(!mobileMode())return;
+ const height=mobileVisibleHeight();
+ document.getElementById('stage').style.setProperty('--mobile-device-width',height<=600?'190px':height<=720?'200px':'220px');
+}
+function fitTouchRect(rect,bounds,target=mobileMode()?40:32){
+ const width=Math.min(Math.max(rect.w,target),bounds.right-bounds.left),height=Math.min(Math.max(rect.h,target),bounds.bottom-bounds.top);
+ return {x:Math.max(bounds.left,Math.min(rect.x+rect.w/2-width/2,bounds.right-width)),y:Math.max(bounds.top,Math.min(rect.y+rect.h/2-height/2,bounds.bottom-height)),w:width,h:height};
+}
+function touchIntersects(a,b){return Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x)>.05&&Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y)>.05;}
+function refreshTouchTargets(){
+ const device=document.getElementById('phone'),primary=document.getElementById('hotspot'),layer=document.getElementById('control-layer');
+ const buttons=[primary,...(layer?Array.from(layer.children).filter(n=>n.tagName.toLowerCase()==='button'):[])].filter(n=>!n.hidden);
+ const width=device.clientWidth;if(!width)return;
+ const aspect=(device.style.aspectRatio||'390 / 844').split('/').map(Number),height=width*aspect[1]/aspect[0];
+ const items=buttons.map(button=>{
+  const rect={x:parseFloat(button.style.left)*width/100,y:parseFloat(button.style.top)*height/100,w:parseFloat(button.style.width)*width/100,h:parseFloat(button.style.height)*height/100};
+  return {button,rect,bounds:{left:0,top:0,right:width,bottom:height+12}};
+ });
+ // Split neighboring targets at the space between their original visual areas.
+ // Duplicate primary/course controls retain the same destination and are allowed.
+ for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){
+  const a=items[i],b=items[j],ra=a.rect,rb=b.rect;
+  if(!touchIntersects(fitTouchRect(ra,a.bounds),fitTouchRect(rb,b.bounds)))continue;
+  const separateX=ra.x+ra.w<=rb.x+.05||rb.x+rb.w<=ra.x+.05;
+  const separateY=ra.y+ra.h<=rb.y+.05||rb.y+rb.h<=ra.y+.05;
+  if(!separateX&&!separateY)continue;
+  if(separateX&&(!separateY||Math.abs((ra.x+ra.w/2)-(rb.x+rb.w/2))>=Math.abs((ra.y+ra.h/2)-(rb.y+rb.h/2)))){
+   const [left,right]=ra.x<rb.x?[a,b]:[b,a],cut=(left.rect.x+left.rect.w+right.rect.x)/2;
+   left.bounds.right=Math.min(left.bounds.right,cut);right.bounds.left=Math.max(right.bounds.left,cut);
+  }else{
+   const [above,below]=ra.y<rb.y?[a,b]:[b,a],cut=(above.rect.y+above.rect.h+below.rect.y)/2;
+   above.bounds.bottom=Math.min(above.bounds.bottom,cut);below.bounds.top=Math.max(below.bounds.top,cut);
+  }
+ }
+ for(const {button,rect,bounds} of items){
+  const hit=fitTouchRect(rect,bounds);
+  button.style.setProperty('--touch-left',(hit.x-rect.x)+'px');button.style.setProperty('--touch-top',(hit.y-rect.y)+'px');
+  button.style.setProperty('--touch-width',hit.w+'px');button.style.setProperty('--touch-height',hit.h+'px');
+  button.dataset.touchRect=JSON.stringify(hit);button.dataset.visualRect=JSON.stringify(rect);
+  button.classList.toggle('tip-above',(rect.y+rect.h)/height>.84);
+  // Keep hints on the screen when the target is close to an edge.
+  button.classList.toggle('tip-left',button.dataset.tipAlign!=='center'&&(rect.x+rect.w/2)/width<.28);button.classList.toggle('tip-right',button.dataset.tipAlign!=='center'&&(rect.x+rect.w/2)/width>.72);
+ }
+}
+// One header represents ordinary steps, Next Flow, and the completed state.
+function syncDecisionHeader(){
+ const root=document.getElementById('stage'),details=document.getElementById('decision-details');
+ const next=!document.getElementById('next-flow').hidden,restart=!document.getElementById('restart').hidden;
+ const state=next?'next':restart?'restart':'none';
+ document.getElementById('details-heading').textContent=next?'Click Next Flow to continue':restart?'All flows completed':'Design details (Flow '+root.dataset.flow+')';
+ details.classList.toggle('flow-next',next);
+ details.classList.toggle('action-ready',state!=='none');
+ root.classList.toggle('action-ready',state!=='none');
+ root.dataset.actionState=state;
+}
+// Keep mobile progress below the artwork and anchor desktop guidance at lower left.
+function arrangeDecisionLayout(){
+ const root=document.getElementById('stage'),layout=document.getElementById('design-layout');
+ const heading=document.getElementById('decision-heading'),phoneColumn=document.getElementById('phone-column');
+ const details=document.getElementById('decision-details'),progress=document.getElementById('flow-progress');
+ const title=document.getElementById('details-heading'),actions=document.getElementById('actions'),panel=document.getElementById('completion-panel');
+ const guide=document.getElementById('screen-guide'),notes=document.getElementById('annotation-list')||document.getElementById('annotation');
+ const mobile=mobileMode(),action=!document.getElementById('next-flow').hidden||!document.getElementById('restart').hidden;
+ const placement=mobile?'mobile':'desktop',key=placement+':'+action;
+ panel.hidden=mobile&&!action;
+ if(root.dataset.layoutKey===key)return;
+ if(mobile){
+  phoneColumn.append(guide);
+  if(action){panel.append(title,actions);details.append(panel,notes);}
+  else details.append(title,notes,actions,panel);
+  layout.append(heading,phoneColumn,progress,details);
+ }else{
+  if(action){panel.append(guide,title,actions);details.append(notes,panel);}
+  else{panel.append(guide,actions);details.append(title,notes,panel);}
+  layout.append(heading,details,phoneColumn);root.append(progress);
+ }
+ root.dataset.progressPlacement=placement;root.dataset.layoutKey=key;
+}
+function refreshMobileUI(options={}){
+ syncDecisionHeader();
+ arrangeDecisionLayout();
+ ++mobileViewRevision;
+ if(mobileViewFrame!==null){cancelAnimationFrame(mobileViewFrame);mobileViewFrame=null;}
+ updateMobileSizing();refreshTouchTargets();
+ if(!mobileMode()||!options.user)return;
+ const revision=mobileViewRevision;
+ mobileViewFrame=requestAnimationFrame(()=>{
+  mobileViewFrame=null;if(revision!==mobileViewRevision||!mobileMode())return;
+  let target,block='nearest';
+  const next=document.getElementById('next-flow'),restart=document.getElementById('restart'),hot=document.getElementById('hotspot');
+  if(options.flowStart||options.reset){target=document.getElementById('decision-heading');block='start';}
+  else if(!next.hidden)target=next;
+  else if(!restart.hidden)target=restart;
+  else target=!hot.hidden?hot:document.getElementById('phone');
+  if(!target)return;
+  const rect=target.getBoundingClientRect(),height=mobileVisibleHeight();
+  if(window.parent!==window&&window.scrollDecisionTarget)window.scrollDecisionTarget(target,block);else if(rect.top<16||rect.bottom>height-16)target.scrollIntoView({block,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+ });
+}
+function mobileResize(){arrangeDecisionLayout();updateMobileSizing();refreshTouchTargets();}
+window.addEventListener('resize',mobileResize,{passive:true});
+if(window.visualViewport)window.visualViewport.addEventListener('resize',mobileResize,{passive:true});
+updateMobileSizing();
+
+hotspot.addEventListener('click',()=>{
+ const s=steps[stepIndex];
+ if(s.hotspot)showStep(s.hotspot.next,{user:true});
+});
+el('next-flow').addEventListener('click',()=>showStep(6,{user:true,flowStart:true}));
+el('restart').addEventListener('click',()=>{
+ lastNote=null;lastFlow=null;markerGroup.dataset.anchors='';
+ showStep(0,{user:true,reset:true});
+});
+showStep(0);
+window.ReloPreview={getStep:()=>stepIndex,goToStep:showStep};
+</script></body></html>

@@ -1,2 +1,540 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>pathway · Design decisions</title><link rel="stylesheet" href="../../shared/decision-tour.css?v=numbered-tour-1"></head><body><main class="page"><section class="decision-tour" aria-label="pathway interactive design decisions"><div class="tour-copy"><p class="tour-eyebrow">DESIGN DECISIONS</p><h1 class="tour-title">A closer look at the decisions on each screen</h1><h2 class="tour-details-title">Design details</h2><ol class="tour-notes" aria-live="polite"></ol><p class="tour-guidance" aria-live="polite"></p><button class="tour-restart" type="button">Restart</button></div><div class="tour-visual"><div class="tour-device"><div class="tour-viewport" tabindex="0" role="region"><div class="tour-surface"><img class="tour-screen" alt="" draggable="false"><div class="tour-controls"></div><div class="tour-markers" aria-hidden="true"></div></div></div></div><nav class="tour-pagination" aria-label="Screen navigation"><button class="tour-page-button" data-tour-prev type="button" aria-label="Previous screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><span class="tour-count" aria-live="polite"></span><button class="tour-page-button" data-tour-next type="button" aria-label="Next screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button></nav><p class="tour-status" aria-live="polite"></p></div></section></main><script src="../../shared/decision-tour.js?v=numbered-tour-1"></script><script src="app.js?v=numbered-tour-1"></script><script src="../../shared/interactive-embed-child.js"></script></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Pathway — Design decisions · Responsive screen size v27</title><style>@font-face { font-family:Archivo;src:url("../../shared/fonts/archivo-0e094a7d3c7c.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap }
+:root { --accent:#064e3b; --eyebrow:#924900; --hot-rgb:149 226 178; --progress-gray:#d9d9d9; }
+* { box-sizing:border-box; }
+[hidden] { display:none!important; }
+html { color-scheme:light; }
+body { margin:0; background:#f5f4f0; color:#171715; font-family:Archivo,"Helvetica Neue",Arial,sans-serif; }
+button { font:inherit; cursor:pointer; touch-action:manipulation; }
+button:focus-visible,[tabindex]:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+.stage { width:min(1210px,calc(100% - 40px)); margin:24px auto; padding:clamp(28px,5vw,66px); background:#fff; }
+.design-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,390px); grid-template-rows:auto 1fr; grid-template-areas:"header phone" "details phone"; gap:0 clamp(34px,6vw,108px); align-items:start; }
+.eyebrow { font-weight:700; font-size:14px; letter-spacing:.025em; color:var(--eyebrow); margin:0 0 48px; min-height:18px; }
+.main-title { max-width:500px; color:var(--accent); font-weight:500; font-size:clamp(32px,3.4vw,42px); letter-spacing:-.035em; line-height:1.1; margin:0 0 clamp(60px,6.5vw,100px); overflow-wrap:break-word; }
+.details-heading,.completion-panel .screen-guide { color:var(--accent); font-size:clamp(22px,2.3vw,28px); font-weight:500; letter-spacing:-.02em; line-height:1.2; margin:0 0 28px; }
+.annotation-list { display:flex; flex-direction:column; width:min(100%,485px); gap:14px; }
+.annotation { display:flex; gap:18px; align-items:flex-start; width:100%; }
+.annotation.fade-in { animation:annotation-entrance .48s ease-out both; }
+.annotation-number { display:grid; place-items:center; flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; font-size:16px; font-weight:700; }
+.annotation-copy { min-width:0; }
+.annotation-copy h3 { margin:1px 0 8px; font-size:clamp(17px,1.7vw,20px); line-height:1.2; font-weight:600; color:var(--accent); }
+.annotation-copy p { font-size:14.5px; line-height:1.4; margin:0; overflow-wrap:break-word; }
+.action-button { width:207px; min-height:52px; padding:10px 27px; border:0; border-radius:8px; box-shadow:0 3px 6px #0002; background:var(--accent); color:#fff; font-size:20px; font-weight:600; }
+.action-button:hover { filter:brightness(.9); }
+.phone-column { grid-area:phone; position:relative; min-width:0; justify-self:center; width:min(100%,340px); }
+.phone { position:relative; width:100%; aspect-ratio:390/844; isolation:isolate; container-type:inline-size; background:#eef3f5; }
+.image-scroll { position:absolute; inset:0; overflow:hidden; }
+.screen { display:block; width:100%; height:100%; object-fit:fill; user-select:none; -webkit-user-select:none; pointer-events:none; }
+.outgoing-screen { position:absolute; inset:0; z-index:1; width:100%; height:100%; pointer-events:none; }
+#marker-layer,#control-layer { position:absolute; inset:0; pointer-events:none; }
+#control-layer { z-index:4; }
+.hotspot { position:absolute; pointer-events:auto; z-index:2; padding:0; border:.25641026cqw solid rgb(var(--hot-rgb)/.5); border-radius:var(--hot-radius,8px); background:rgb(var(--hot-rgb)/.58); animation:hotspot-pulse 2s ease-in-out infinite; }
+.hotspot:hover { background:rgb(var(--hot-rgb)/.75); }
+.hotspot.flash { animation:hotspot-flash .6s ease-in-out 1; }
+.hotspot.secondary { background:transparent; border-color:transparent; animation:none; }
+.hotspot.secondary:hover,.hotspot.secondary:focus-visible { background:rgb(var(--hot-rgb)/.35); }
+.hotspot-tip { position:absolute; isolation:isolate; top:calc(100% + 2.05128205cqw); left:50%; transform:translateX(-50%); display:flex; gap:1.28205128cqw; align-items:center; padding:2.30769231cqw 2.82051282cqw; border-radius:1.79487179cqw; box-shadow:0 .51282051cqw 1.79487179cqw #0003; background:#fff; color:var(--accent); font-size:clamp(10px,2.56410256cqw,12px); font-weight:800; line-height:1; white-space:nowrap; pointer-events:none; }
+.hotspot-tip::before { content:""; position:absolute; z-index:-1; top:-1.28205128cqw; left:calc(50% - 1.28205128cqw); width:2.56410256cqw; height:2.56410256cqw; transform:rotate(45deg); background:#fff; }
+.tap-label,.tap-icon,.tap-icon-slot { position:relative; z-index:1; }
+.hotspot.tip-above .hotspot-tip { top:auto; bottom:calc(100% + 2.05128205cqw); }
+.hotspot.tip-above .hotspot-tip::before { top:auto; bottom:-1.28205128cqw; }
+.hotspot.tip-left .hotspot-tip { left:0; transform:none; }
+.hotspot.tip-right .hotspot-tip { left:auto; right:0; transform:none; }
+.tap-icon { width:3.33333333cqw; height:4.35897436cqw; flex:0 0 auto; }
+.marker { position:absolute; z-index:1; width:10.76923077cqw; height:10.76923077cqw; border-radius:50%; background:var(--accent); color:white; display:grid; place-items:center; transform:translate(-50%,-50%); pointer-events:none; font-size:4.87179487cqw; line-height:1; font-weight:700; box-shadow:0 .76923077cqw 1.79487179cqw #0003; }
+.marker.fade-in { animation:marker-entrance .48s ease-out both; }
+.decision-outline { position:absolute; pointer-events:none; border:1.5px solid var(--annotation-outline,var(--accent)); border-radius:3px; }
+.progress { margin-top:clamp(25px,4vw,54px); width:100%; }
+.bars { display:grid; gap:9px; width:100%; }
+.bar { min-width:0; height:10px; border-radius:50px; background:var(--progress-gray); transition:background .3s ease; }
+.bar.active { background:var(--accent); }
+.scroll-hint { position:absolute; left:50%; bottom:10px; z-index:6; transform:translateX(-50%); padding:7px 12px; border-radius:22px; background:#fffffff2; color:var(--accent); box-shadow:0 2px 7px #0002; font-size:12px; font-weight:600; white-space:nowrap; pointer-events:none; animation:scroll-cue 1.4s ease-in-out 3; }
+.scrollable .image-scroll { overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:var(--accent) transparent; touch-action:pan-y pinch-zoom; }
+.scrollable .screen { width:100%; height:auto; object-fit:contain; }
+.sr-only { border:0; clip:rect(0,0,0,0); height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; white-space:nowrap; width:1px; }
+.screen-anywhere { position:absolute; inset:0; z-index:6; width:100%; height:100%; padding:0; border:0; background:transparent; }
+.screen-anywhere:focus-visible { outline-offset:-4px; }
+.typing-layer { position:absolute; inset:0; z-index:5; pointer-events:none; }
+.typing-mask { position:absolute; background:#f8fafc; color:#475569; display:flex; align-items:center; justify-content:center; font-size:4.1025641cqw; font-weight:400; line-height:1; }
+.typing-mask.current::after { content:""; width:1px; height:1em; background:#475569; margin-left:1px; animation:caret-blink .7s step-end infinite; }
+.typing-policy-mask { position:absolute; left:0; top:57%; width:100%; height:43%; background:#e2e8f0; }
+@keyframes caret-blink { 50% { opacity:0; } }
+@keyframes annotation-entrance { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes marker-entrance { from{opacity:0}to{opacity:1} }
+@keyframes hotspot-pulse { 0%,100%{box-shadow:0 0 0 0 rgb(var(--hot-rgb)/.3)} 50%{box-shadow:0 0 0 1.28205128cqw rgb(var(--hot-rgb)/0)} }
+@keyframes hotspot-flash { 0%,100%{background:rgb(var(--hot-rgb)/.5)} 50%{background:rgb(var(--hot-rgb)/.9)} }
+@keyframes scroll-cue { 50%{transform:translate(-50%,4px)} }
+.kiosk-project { --annotation-outline:#924900; }
+.kiosk-project .design-layout { grid-template-columns:minmax(0,1fr) minmax(0,1.55fr); }
+.kiosk-project .phone-column { width:100%; max-width:740px; padding-right:10px; align-self:center; }
+.kiosk-project .phone { touch-action:pan-y pinch-zoom; }
+.kiosk-project .marker { width:clamp(18px,3.93cqw,42px); height:clamp(18px,3.93cqw,42px); font-size:clamp(10px,1.87cqw,20px); }
+.kiosk-project .hotspot-tip { padding:clamp(5px,.84cqw,9px) clamp(7px,1.03cqw,11px); border-radius:6px; font-size:clamp(10px,.94cqw,12px); gap:5px; }
+.kiosk-project .hotspot-tip::before { display:none; }
+.kiosk-project .tap-pointer { position:absolute; z-index:-1; left:50%; bottom:calc(100% - 5px); width:27px; height:17px; transform:translateX(-50%); }
+.kiosk-project .tip-above .tap-pointer { bottom:auto; top:calc(100% - 5px); transform:translateX(-50%) rotate(180deg); }
+.tap-icon-slot { width:13px; height:18px; flex:0 0 13px; }
+.figma-tap-hand { display:block; width:13px; height:18px; }
+@media(min-width:901px) and (max-width:1120px) {
+  .main-title { font-size:clamp(28px,3vw,34px); }
+  .details-heading,.completion-panel .screen-guide { font-size:clamp(20px,2.2vw,24px); }
+  .annotation-copy p { font-size:14px; }
+  .kiosk-project .design-layout { grid-template-columns:minmax(0,1fr) minmax(0,1.55fr); }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none!important; scroll-behavior:auto!important; }
+  .bar { transition:none; }
+}
+.screen-guide { border:0; clip:auto; height:auto; margin:8px 0 0; overflow:visible; padding:0; position:absolute; top:100%; left:0; white-space:normal; width:100%; text-align:center; color:var(--accent); font-size:13px; font-weight:500; line-height:1.35; }
+.kiosk-project .screen-guide { width:calc(100% - 10px); }
+#marker-layer { position:absolute; inset:0; z-index:20; pointer-events:none; }
+.phone[aria-busy="true"] #marker-layer { visibility:hidden; }
+.heading { grid-area:header; padding-top:0; }
+.details { grid-area:details; min-width:0; display:flex; flex-direction:column; align-items:start; min-height:0; }
+.actions { margin-top:clamp(52px,6vw,95px); display:flex; flex-direction:column; align-items:start; gap:12px; min-height:0; }
+.phone .marker { font-size:clamp(12px,4.87179487cqw,16px); }
+.kiosk-project .phone .marker { font-size:clamp(10px,1.87cqw,20px); }
+.phone .hotspot-tip { isolation:isolate; z-index:1; font-size:10.5px; padding:6px 8px; gap:4px; }
+.phone .hotspot-tip::before { z-index:-1; top:-4px; left:calc(50% - 4px); width:8px; height:8px; }
+.phone .hotspot.tip-above .hotspot-tip { top:auto; bottom:calc(100% + 6px); }
+.phone .hotspot.tip-above .hotspot-tip::before { top:auto; bottom:-4px; }
+.phone .hotspot.tip-left .hotspot-tip { left:0; transform:none; }
+.phone .hotspot.tip-right .hotspot-tip { left:auto; right:0; transform:none; }
+.phone .tap-icon { width:clamp(10px,3.33333333cqw,13px); height:clamp(13px,4.35897436cqw,17px); }
+.hotspot::after { content:""; position:absolute; left:var(--touch-left,0px); top:var(--touch-top,0px); width:var(--touch-width,100%); height:var(--touch-height,100%); background:transparent; }
+@media(min-width:901px) {
+  .stage { width:min(1210px,calc(100% - 32px)); margin:12px auto; padding:24px 32px; }
+  .design-layout { grid-template-columns:minmax(0,1fr) minmax(0,300px); column-gap:clamp(28px,4vw,64px); }
+  .eyebrow { margin-bottom:20px; }
+  .main-title { margin-bottom:28px; }
+  .details-heading,.completion-panel .screen-guide { margin-bottom:18px; }
+  .actions { margin-top:14px; }
+  .phone-column { width:min(100%,270px); }
+  .kiosk-project .phone-column { width:min(100%,740px); max-width:740px; }
+  .screen-guide { margin-top:14px; }
+  .progress { margin-top:28px; }
+  .bars { gap:7px; }
+  .bar { height:8px; }
+}
+
+
+.completion-panel { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; width:100%; gap:14px; }
+.completion-panel > .details-heading,.completion-panel > .screen-guide { grid-column:1; grid-row:1; min-width:0; overflow-wrap:break-word; }
+.completion-panel > .actions { grid-column:2; grid-row:1; align-self:center; }
+.completion-panel .details-heading { margin:0; }
+.completion-panel .actions { margin:0; min-height:0; }
+@media(max-width:1120px) {
+  .action-button { width:116px; min-width:116px; max-width:100%; height:36px; min-height:36px; padding:8px 12px; border-radius:8px; font-size:13px; line-height:20px; }
+}
+
+/* Desktop and middle widths keep the same 700px section across every step. Mobile stays content-sized. */
+@media(min-width:901px) {
+ .stage.action-ready .screen-guide { display:none; }
+ .stage { height:700px; margin-top:0; margin-bottom:0; overflow-y:auto; overscroll-behavior-y:contain; scrollbar-gutter:stable; }
+ /* Center the title and design notes together, with guidance/actions in a separate bottom row. */
+ .design-layout {
+  min-height:calc(100% - 36px);
+  grid-template-rows:auto minmax(0,1fr) auto auto auto minmax(0,1fr) auto;
+  grid-template-areas:"eyebrow phone" ". phone" "title phone" "details-title phone" "annotations phone" ". phone" "completion phone";
+ }
+ .heading,.details { display:contents; }
+ .eyebrow { grid-area:eyebrow; }
+ .main-title { grid-area:title; }
+ .details > .details-heading { grid-area:details-title; }
+ .details > .annotation,.details > .annotation-list { grid-area:annotations; }
+ .completion-panel { grid-area:completion; align-self:end; margin-top:0; padding-top:18px; }
+ .details.action-ready .completion-panel { padding-top:0; }
+ .completion-panel .screen-guide { position:static; top:auto; left:auto; transform:none; width:100%; margin:0; text-align:left; }
+}
+
+@media(max-width:900px) {
+  .relo-project { font-family:ArchivoMobile,"Helvetica Neue",Arial,sans-serif; }
+  .stage { --mobile-device-width:220px; width:100%; margin:0; padding:12px 14px; }
+  .design-layout,.kiosk-project .design-layout { grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto auto; grid-template-areas:"header" "phone" "progress" "details"; gap:0; }
+  .heading { scroll-margin-top:12px; }
+  .eyebrow { font-size:12px; line-height:1.2; min-height:18px; margin:0 0 6px; }
+  .main-title { font-size:24px; line-height:1.12; margin:0 0 10px; max-width:570px; }
+  .phone-column { width:min(100%,var(--mobile-device-width)); }
+  .details { padding-top:8px; }
+  .details-heading,.completion-panel .screen-guide { font-size:18px; line-height:1.2; margin:0 0 8px; }
+  .completion-panel { gap:10px; }
+  .completion-panel .details-heading { min-width:0; }
+  .completion-panel .actions { align-self:center; }
+  .details.action-ready > .annotation,.details.action-ready > .annotation-list:not(:empty) { margin-top:8px; }
+  .annotation-list { gap:8px; }
+  .annotation { gap:10px; }
+  .annotation-number { width:22px; height:22px; flex-basis:22px; font-size:12px; }
+  .annotation-copy { min-width:0; }
+  .annotation-copy h3 { font-size:15px; line-height:1.25; margin:0 0 4px; }
+  .annotation-copy p { font-size:13px; line-height:1.38; }
+  .actions { margin-top:10px; }
+  .action-button { position:relative; }
+  .progress { grid-area:progress; margin-top:8px; margin-bottom:0; }
+  .phone .marker { width:10.76923077cqw; height:10.76923077cqw; }
+  .phone .hotspot-tip { top:calc(100% + 6px); border-radius:6px; line-height:1; }
+  .hotspot::after { z-index:0; }
+  .kiosk-project .phone-column { width:100%; max-width:640px; padding-right:10px; align-self:start; }
+  .kiosk-project .phone .marker { width:clamp(18px,3.93cqw,42px); height:clamp(18px,3.93cqw,42px); }
+  /* Keep a two-line guidance slot even when its message is visually absent. */
+  .screen-guide { position:relative; top:auto; left:50%; transform:translateX(-50%); width:calc(100vw - 28px); margin:14px 0 0; font-size:12px; line-height:1.35; min-height:2.7em; display:flex; align-items:center; justify-content:center; }
+  .stage.action-ready .screen-guide { visibility:hidden; }
+  .kiosk-project .screen-guide { left:0; transform:none; width:100%; }
+  .action-button::after { content:""; position:absolute; inset:-2px 0; background:transparent; }
+  .bars { gap:6px; }
+  .bar { height:7px; }
+  .scroll-hint { font-size:11px; bottom:6px; padding:6px 10px; }
+}
+@media(max-width:900px) and (max-height:720px) {
+  .stage { --mobile-device-width:200px; }
+}
+@media(max-width:900px) and (max-height:600px) {
+  .stage { --mobile-device-width:190px; }
+}
+
+/* Larger artwork without changing the guided interaction or original aspect ratios. */
+@media(min-width:1121px) {
+ .kiosk-project .stage { width:min(1360px,calc(100% - 32px)); }
+ .kiosk-project .design-layout { grid-template-columns:minmax(0,1fr) minmax(0,1.65fr); column-gap:clamp(28px,3vw,40px); }
+}
+</style><link rel="stylesheet" href="../../shared/design-decision-integration.css?v=20261016-1">
+<script src="../../shared/design-decision-integration.js?v=20261016-1" defer></script></head>
+<body class="kiosk-project"><main class="stage" id="stage" tabindex="0" aria-label="Interactive Pathway design decisions">
+<section class="design-layout" id="design-layout">
+<header class="heading" id="decision-heading"><p class="eyebrow">DESIGN DECISIONS</p><h1 id="main-title" class="main-title">A closer look at the decisions on each screen</h1></header>
+<div class="details" id="decision-details"><h2 id="details-heading" class="details-heading">Design details (Flow 1)</h2><div class="annotation-list" id="annotation-list" aria-label="Design decision annotations"></div><div class="actions" id="actions"><button class="action-button" type="button" id="next-flow" hidden>Next Flow</button><button class="action-button" type="button" id="restart" hidden>Restart</button></div><div class="completion-panel" id="completion-panel" hidden></div></div>
+<div class="phone-column" id="phone-column"><div class="phone" id="phone"><div class="image-scroll" id="image-scroll" role="region" aria-label="Application screen" tabindex="-1"><img class="screen" id="screen-img" alt="Application screen" draggable="false"></div><div id="marker-layer"></div><div id="control-layer"></div><button id="hotspot" class="hotspot" type="button" aria-label="Continue guided interaction" aria-describedby="screen-guide"><span class="hotspot-tip" aria-hidden="true"><img class="tap-pointer" width="27" height="17" alt="" src="assets/screen-f330cde9973d.svg"><span class="tap-icon-slot"><img class="figma-tap-hand" width="13" height="18" alt="" src="assets/screen-a20ea69fabc1.svg"></span><span class="tap-label">TAP HERE</span></span></button><button id="screen-anywhere" class="screen-anywhere" type="button" aria-label="Fill in example baggage details" aria-describedby="screen-guide" hidden></button><div id="typing-layer" class="typing-layer" aria-hidden="true" hidden></div><div class="scroll-hint" id="scroll-hint" hidden>↓ Scroll to explore</div></div><p class="screen-guide" id="screen-guide" aria-live="polite">Click the screen to find interactive areas</p></div>
+</section>
+<footer class="progress" id="flow-progress"><div class="bars" id="bars" role="progressbar" aria-valuemin="1" aria-label="Flow progress"></div><span id="live-status" aria-live="polite" class="sr-only"></span></footer>
+</main><script>
+'use strict';
+// Existing Relo-style state model. Percent coordinates refer to each original bitmap.
+const IMAGES={"appliance":{"src":"assets/screen-c8fc1d5236b4.webp","w":1070,"h":668,"figmaNode":"2082:169","figmaImageHash":"825e4daf80f443c64765584b0e28e34c5154541e"},"custodial":{"src":"assets/screen-d873e7487d47.webp","w":1070,"h":668,"figmaNode":"2018:153","figmaImageHash":"586b6a777eacbf1e1f46a3595b9c6751310b7cb3"},"english":{"src":"assets/screen-0fc5917451f2.webp","w":1280,"h":799,"figmaNode":"2082:181","figmaImageHash":"ec74d7e3185229e3f131a179c3552a2b2f2e7868"},"home":{"src":"assets/screen-cb62deee029c.webp","w":1070,"h":668,"figmaNode":"2066:31","figmaImageHash":"a4ce41635abcd31a03d90a3fa747734a77d565ce"},"job":{"src":"assets/screen-f2d284c92f3a.webp","w":1070,"h":668,"figmaNode":"2071:27","figmaImageHash":"d9f47a8f97f17914c227342171a3fc432715a018"},"job-categories":{"src":"assets/screen-b9b5192f40de.webp","w":1070,"h":668,"figmaNode":"2068:178","figmaImageHash":"b6f91752983c0d827539a159406b7250c3d01ad9"},"job-contact":{"src":"assets/screen-ac490965dd5f.webp","w":1070,"h":668,"figmaNode":"2075:13","figmaImageHash":"cc7e126342d6451f0980c9f6845bb7cff1ff2743"},"job-liked":{"src":"assets/screen-62d868f356da.webp","w":1070,"h":668,"figmaNode":"2075:25","figmaImageHash":"fbd3e2f53762cf7ec98529e09072585ac7d83d73"},"program-detail":{"src":"assets/screen-7f6c6aed8179.webp","w":1280,"h":3231,"figmaNode":"2082:229","figmaImageHash":"95c8e341ba0f6160c09ac2080d6a716cbd2ef0ee"},"signed-home":{"src":"assets/screen-bbbfc3e127f7.webp","w":1070,"h":668,"figmaNode":"2068:149","figmaImageHash":"a5b80ee39335947eb84ae3abe64c161d9b9e3028"},"signin":{"src":"assets/screen-f758671d58e8.webp","w":1070,"h":668,"figmaNode":"2068:62","figmaImageHash":"3c280eab49539441d8a2c878e146f5a1d42f7e17"},"signin-filled":{"src":"assets/screen-04c7553d5df7.webp","w":1070,"h":668,"figmaNode":"2068:86","figmaImageHash":"9567d971393a18cd36111d0d7c34d2b38e272128"},"hospitality":{"src":"assets/screen-2a86f4da461f.webp","w":1070,"h":896,"figmaNode":"2068:206","figmaImageHash":"ae58156d2c2403ca1987acf1d524990d6d0306a1"},"host":{"src":"assets/screen-e9e2e5b1c6ce.webp","w":1070,"h":668,"figmaNode":"2077:77","figmaImageHash":"2606e5b02d1e11d358d6c567159e062115750366"},"cna":{"src":"assets/screen-d34c8bf29279.webp","w":1070,"h":668,"figmaNode":"2084:5","figmaImageHash":"7301332b9ada24a387cd4ff43b0d718908b6ea5d"}};
+const STEPS=[{"slide":"Slide 5","img":"home","notes":[["Language options","Helps users use the service in a more familiar language."],["Large buttons and clear hierarchy","Makes key actions easy to identify and reduces cognitive load."],["Warm colors, clear spacing, and relatable imagery","Creates a more approachable experience for first-time or low-digital-literacy users."]],"hot":[5.28976600803581,76.89165021953086,23.412292626259905,14.974305014023345],"marker":[[78.93,9.438,1],[3.367,78.804,2],[82.483,62.324,3]],"flow":1,"within":0,"label":"Check in","extra":[{"label":"Sign in","rect":[85.16388606664911,6.278807847222324,9.504072199007556,6.716721360403685],"action":"next"}],"alt":"Pathway Job Center home screen"},{"slide":"Slide 6","img":"signin","notes":[["Simple sign-in with a phone number or Member ID","Lowers the barrier for users to access their accounts."]],"hot":[29.609375,50.81351689612015,40.78125,7.008760951188986],"marker":[[74.347,54.383,1]],"flow":1,"within":1,"label":"Use the example phone number","alt":"Sign in with a phone number or Member ID"},{"slide":"Slide 7","img":"signin-filled","notes":[["Simple sign-in with a phone number or Member ID","Lowers the barrier for users to access their accounts."]],"hot":[29.54101080985065,60.90458593451675,19.64434901849223,6.716721360403685],"marker":[[72.664,55.432,1]],"flow":1,"within":2,"label":"Sign in with the example number","alt":"Sign-in form with an example phone number"},{"slide":"Slide 8","img":"signed-home","notes":[],"hot":null,"action":"next","flow":1,"within":3,"alt":"Signed-in Pathway home screen"},{"slide":"Slide 9","img":"signed-home","notes":[],"hot":[18.046309248579988,58.478308361484885,23.412292626259905,14.974305014023345],"flow":2,"within":0,"label":"Find Jobs","alt":"Signed-in Pathway home screen"},{"slide":"Slide 10","img":"job-categories","notes":[["Step-by-step job search","Reduces information overload by showing only what users need at each stage."]],"hot":[5.824783887463943,41.30589624332299,20.535110301756163,43.6965174988259],"marker":[[3.834,35.805,1]],"flow":2,"within":1,"label":"Browse Hospitality jobs","alt":"Choose a job category","outlines":[[5.797101449275362,39.70037453183521,88.35904628330997,49.8876404494382]]},{"slide":"Slide 11","img":"hospitality","notes":[["Category-based browsing","Helps users find jobs without needing to know specific job titles or search terms."]],"hot":[34.908209924715074,31.471820384122974,30.055922266611933,14.3581491680607],"marker":[[34.882,29.144,1]],"flow":2,"within":2,"label":"Open the Summer Hotel Janitor job","alt":"Hospitality job opportunities"},{"slide":"Slide 13","img":"job","notes":[["Saved activity","Allows advisors to understand user interests and provide more relevant support."]],"hot":[80.67753530108263,2.765312222477443,5.143503472915098,8.239905311315386],"marker":[[91.835,13.184,1]],"flow":2,"within":3,"label":"Save this job","alt":"Janitor job details"},{"slide":"Slide 14","img":"job-liked","notes":[],"hot":[67.51905064369139,3.5527475373187825,12.21366982853923,6.761067032624582],"flow":2,"within":4,"label":"I'm Interested — show employer contact information","alt":"Saved Janitor job"},{"slide":"Slide 15","img":"job-contact","notes":[["Interested job","Users can click ‘I’m Interested’ to access employer contact information. The action is automatically recorded in the agency’s case management system."],["Navigation between jobs","Lets users compare opportunities without returning to the main list."]],"hot":[94.84667163177922,42.803611395999724,5.153322888636118,19.263999719094137],"marker":[[54.428,35.357,1],[101.935,58.129,2]],"flow":2,"within":5,"label":"View the next job","alt":"Employer contact information for the Janitor job"},{"slide":"Slide 16","img":"host","notes":[],"hot":null,"action":"next","flow":2,"within":6,"alt":"Host job at House of Nanking"},{"slide":"Slide 17","img":"custodial","notes":[["Carousel","Lets users explore programs one at a time without feeling overwhelmed. Navigation controls make it easy to move between different options."],["Large images and clear summary","Helps users quickly understand what each program offers."]],"hot":null,"autoplay":true,"marker":[[14.402,91.238,1],[49.004,63.672,2]],"flow":3,"within":0,"courseNav":true,"alt":"Custodial Training course","outlines":[[17.48791276617632,85.39543329193404,64.90166556003405,12.135140520432731],[50.96744629714489,63.672033594863095,44.32765054100308,15.73073771167206]]},{"slide":"Slide 18","img":"appliance","notes":[["Carousel","Lets users explore programs one at a time without feeling overwhelmed. Navigation controls make it easy to move between different options."],["Large images and clear summary","Helps users quickly understand what each program offers."]],"hot":null,"autoplay":true,"marker":[[14.402,91.238,1],[49.004,63.672,2]],"flow":3,"within":1,"courseNav":true,"alt":"Appliance Repairing course","outlines":[[17.48791276617632,85.39543329193404,64.90166556003405,12.135140520432731],[50.96744629714489,63.672033594863095,44.32765054100308,15.73073771167206]]},{"slide":"CNA","img":"cna","notes":[["Carousel","Lets users explore programs one at a time without feeling overwhelmed. Navigation controls make it easy to move between different options."],["Large images and clear summary","Helps users quickly understand what each program offers."]],"hot":null,"autoplay":true,"marker":[[14.402,91.238,1],[49.004,63.672,2]],"flow":3,"within":2,"courseNav":true,"alt":"CNA Training course","outlines":[[17.48791276617632,85.39543329193404,64.90166556003405,12.135140520432731],[50.96744629714489,63.672033594863095,44.32765054100308,15.73073771167206]]},{"slide":"Slide 20","img":"english","notes":[["Carousel","Lets users explore programs one at a time without feeling overwhelmed. Navigation controls make it easy to move between different options."],["Large images and clear summary","Helps users quickly understand what each program offers."]],"hot":[18.046875,87.35919899874844,15.632578125,7.59874843554443],"marker":[[14.402,91.238,1],[49.004,63.672,2]],"flow":3,"within":3,"label":"Return to Custodial Training","courseNav":true,"alt":"English Class course","outlines":[[17.48791276617632,85.39543329193404,64.90166556003405,12.135140520432731],[50.96744629714489,63.672033594863095,44.32765054100308,15.73073771167206]]},{"slide":"Slide 21","img":"custodial","notes":[["Learn more actions","Lets users explore additional details only when they are interested."]],"hot":[13.684453125,68.78635794743428,15.632578125,8.801001251564454],"marker":[],"flow":3,"within":4,"label":"Learn more about Custodial Training","courseNav":true,"alt":"Custodial Training course"},{"slide":"Slide 22","img":"program-detail","notes":[],"hot":null,"scroll":true,"action":"restart","flow":3,"within":5,"alt":"Custodial Training details, eligibility and careers"}];
+const FLOW_LENGTHS=[4, 7, 6];
+const IS_KIOSK=true;
+let index=0,lastNotes='',lastFlow=0,timer=null,frameAnimation=null,revealAnimation=null;
+let manualCarousel=false,scrollComplete=false,exitSaved=false,transitionToken=0;
+let typingTimer=null,typingActive=false;
+const $=id=>document.getElementById(id);
+const stage=$('stage'),device=$('phone'),screen=$('screen-img'),hot=$('hotspot');
+const noteList=$('annotation-list'),markers=$('marker-layer'),bars=$('bars'),scroll=$('image-scroll');
+const controlLayer=$('control-layer');
+const reduced=matchMedia('(prefers-reduced-motion:reduce)');
+const anywhere=$('screen-anywhere'),typingLayer=$('typing-layer');
+const COURSE_STEPS=IS_KIOSK?[15,12,13,14]:[];
+const COURSE_NAMES=['Custodial','Appliance Repairing','CNA','English'];
+function clearTimer(){if(timer!==null){clearTimeout(timer);timer=null;}}
+function cancelReveal(){if(revealAnimation!==null){cancelAnimationFrame(revealAnimation);revealAnimation=null;}}
+function clearCrossfade(){if(frameAnimation){frameAnimation.cancel();frameAnimation=null;}document.querySelectorAll('.outgoing-screen').forEach(n=>n.remove());}
+function nextStep(){if(index+1<STEPS.length)showStep(index+1,{user:true,flowStart:STEPS[index].action==='next'});}
+function rebuildNotes(notes,animate){
+ const sig=JSON.stringify(notes);if(sig===lastNotes)return;
+ lastNotes=sig;noteList.replaceChildren();
+ notes.forEach(([title,body],i)=>{
+  const item=document.createElement('div');item.className='annotation'+(animate?' fade-in':'');
+  const number=document.createElement('span');number.className='annotation-number';number.setAttribute('aria-hidden','true');number.textContent=String(i+1);
+  const copy=document.createElement('div');copy.className='annotation-copy';
+  const h=document.createElement('h3');h.textContent=title;const p=document.createElement('p');p.textContent=body;
+  copy.append(h,p);item.append(number,copy);noteList.append(item);
+ });
+}
+function rebuildMarkers(data,animate){
+ const sig=JSON.stringify(data||[]);if(markers.dataset.sig===sig)return;
+ markers.dataset.sig=sig;markers.replaceChildren();
+ for(const [x,y,n] of data||[]){
+  const badge=document.createElement('span');badge.className='marker'+(animate?' fade-in':'');badge.textContent=String(n||1);badge.style.left=x+'%';badge.style.top=y+'%';badge.setAttribute('aria-hidden','true');markers.append(badge);
+ }
+}
+function updateProgress(flow,position){
+ const total=FLOW_LENGTHS[flow-1];
+ if(lastFlow!==flow){bars.replaceChildren();bars.style.gridTemplateColumns=`repeat(${total},minmax(0,1fr))`;for(let j=0;j<total;j++){const b=document.createElement('span');b.className='bar';b.setAttribute('aria-hidden','true');bars.append(b);}lastFlow=flow;}
+ Array.from(bars.children).forEach((b,j)=>b.classList.toggle('active',j<=position));
+
+ bars.setAttribute('aria-label',`Flow ${flow}, step ${position+1} of ${total}`);bars.setAttribute('aria-valuemax',String(total));bars.setAttribute('aria-valuenow',String(position+1));
+}
+function positionControl(button,rect){
+ const [x,y,w,h]=rect;Object.assign(button.style,{left:x+'%',top:y+'%',width:w+'%',height:h+'%'});
+ button.classList.toggle('tip-above',y+h>84);button.classList.toggle('tip-right',x+w/2>72);button.classList.toggle('tip-left',x+w/2<28);
+ button.style.setProperty('--hot-radius',IS_KIOSK?'6px':Math.min(14,Math.max(4,w/5))/390*100+'cqw');
+}
+function activate(action){
+ if(action==='save-exit'){
+  // Demonstration state only: nothing is stored or submitted to an airline.
+  exitSaved=true;screen.src=IMAGES.dashboard.src;screen.dataset.img='dashboard';screen.alt='Onway checklist after leaving the unfinished task';device.style.aspectRatio='390 / 844';hot.hidden=true;controlLayer.replaceChildren();markers.replaceChildren();$('screen-guide').textContent='Click Next Flow to continue';$('live-status').textContent='Returned to the checklist in this demonstration. No information was submitted.';return;
+ }
+ if(action==='cancel-exit'){showStep(2,{user:true});return;}
+ if(action==='complete'){$('screen-guide').textContent='All flows completed';hot.hidden=true;return;}
+ nextStep();
+}
+function addSecondary(label,rect,callback){
+ const button=document.createElement('button');button.className='hotspot secondary';button.type='button';button.setAttribute('aria-label',label);positionControl(button,rect);button.addEventListener('click',callback);controlLayer.append(button);return button;
+}
+function buildSecondary(s){
+ controlLayer.replaceChildren();
+ for(const rect of s.outlines||[]){const outline=document.createElement('span');outline.className='decision-outline';outline.setAttribute('aria-hidden','true');const [x,y,w,h]=rect;Object.assign(outline.style,{left:x+'%',top:y+'%',width:w+'%',height:h+'%'});controlLayer.append(outline);}
+ for(const extra of s.extra||[])addSecondary(extra.label,extra.rect,()=>activate(extra.action));
+ if(s.courseNav){
+  COURSE_NAMES.forEach((name,j)=>{
+   const button=addSecondary('Show '+name,[100*(231+j*200.097)/1280,100*698/799,100*200.097/1280,100*60.714/799],()=>showStep(COURSE_STEPS[j],{manual:true,user:true}));
+   button.dataset.course=String(j);button.setAttribute('aria-pressed',String(s.img===['custodial','appliance','cna','english'][j]));
+  });
+ }
+}
+
+// Temporary HTML masks simulate typing over the exact, unchanged Figma bitmap.
+// The masks are removed at the end so the original supplied pixels remain final.
+function cancelTyping(){
+ if(typingTimer!==null){clearTimeout(typingTimer);typingTimer=null;}
+ typingActive=false;typingLayer.replaceChildren();typingLayer.hidden=true;
+ device.setAttribute('aria-busy','false');
+}
+function updateGuidance(){
+ const s=STEPS[index];
+ $('screen-guide').textContent=s.action==='next'?`Flow ${s.flow} completed`:guidance(s);
+}
+function startTyping(token){
+ if(reduced.matches)return;
+ typingActive=true;typingLayer.hidden=false;device.setAttribute('aria-busy','true');hot.hidden=true;
+ const policy=document.createElement('span');policy.className='typing-policy-mask';typingLayer.append(policy);
+ const values=['5','23','23','23','23','28'];
+ const slots=[[30,315,28,25],[28,415,29,23],[103,415,29,23],[178,415,29,23],[253,415,29,23],[328,415,29,23]];
+ const cells=slots.map(([x,y,w,h])=>{const cell=document.createElement('span');cell.className='typing-mask';Object.assign(cell.style,{left:x/390*100+'%',top:y/812*100+'%',width:w/390*100+'%',height:h/812*100+'%'});typingLayer.append(cell);return cell;});
+ let field=0,character=0;
+ function tick(){
+  if(token!==transitionToken||!typingActive)return;
+  if(field===values.length){cancelTyping();hot.hidden=!STEPS[index].hot;updateGuidance();refreshMobileUI();$('live-status').textContent='Example baggage details filled in. Continue to review the next policy.';return;}
+  const cell=cells[field];cell.classList.add('current');cell.textContent=values[field].slice(0,++character);
+  let delay=180;
+  if(character===values[field].length){cell.classList.remove('current');field++;character=0;delay=300;}
+  typingTimer=setTimeout(tick,delay);
+ }
+ updateGuidance();typingTimer=setTimeout(tick,350);
+}
+
+function guidance(s){
+ if(typingActive)return 'Watch the example baggage details fill in';
+ if(s.anywhere)return 'Click anywhere on the screen to fill in baggage details';
+ if(s.scroll)return scrollComplete?'All flows completed':'Scroll within the screen to explore the program';
+ if(s.action==='restart')return 'All flows completed';
+ if(s.action==='next')return 'Click Next Flow to continue';
+ if(s.courseNav){if(index===15)return 'Click Learn more to reveal the content below';if(s.img==='english')return 'Carousel paused · Click Custodial to continue';if(manualCarousel)return 'Carousel paused · Select a course to explore';return 'Carousel changes automatically every 3 seconds';}
+ if(!IS_KIOSK&&s.flow===2)return s.typing?'Click Continue to review the next policy':'Click the highlighted area to continue';
+ return 'Click the screen to find interactive areas';
+}
+function startAutoplay(i){
+ const s=STEPS[i];if(!s.autoplay||manualCarousel||document.hidden||(mobileMode()&&!courseScreenVisible))return;
+ timer=setTimeout(()=>{if(index===i&&!document.hidden&&(!mobileMode()||courseScreenVisible))showStep(i+1);},3000);
+}
+function crossfade(oldSource,token){
+ if(reduced.matches||!oldSource)return;
+ const outgoing=document.createElement('img');outgoing.className='outgoing-screen';outgoing.src=oldSource;outgoing.alt='';outgoing.setAttribute('aria-hidden','true');scroll.append(outgoing);
+ const ready=()=>{if(token!==transitionToken){outgoing.remove();return;}frameAnimation=outgoing.animate([{opacity:1},{opacity:0}],{duration:600,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});frameAnimation.finished.then(()=>{outgoing.remove();frameAnimation=null;},()=>outgoing.remove());};
+ screen.decode().then(ready,()=>outgoing.remove());
+}
+function revealProgramContent(token){
+ if(reduced.matches||token!==transitionToken)return;
+ const maximum=scroll.scrollHeight-scroll.clientHeight;
+ // Reveal some content below the fold, without automatically finishing the page.
+ const target=mobileMode()?Math.min(scroll.clientHeight*.08,maximum*.08,28):Math.min(780*scroll.clientWidth/1280,maximum*.45);
+ if(target<=0)return;
+ const start=scroll.scrollTop,started=performance.now();
+ function tick(now){if(token!==transitionToken)return;const p=Math.min(1,(now-started)/950),ease=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;scroll.scrollTop=start+(target-start)*ease;if(p<1)revealAnimation=requestAnimationFrame(tick);else revealAnimation=null;}
+ revealAnimation=requestAnimationFrame(tick);
+}
+function showStep(i,options={}){
+ if(i<0||i>=STEPS.length)return;
+ const previous=STEPS[index],s=STEPS[i],oldSource=screen.src;
+ const isCarouselChange=IS_KIOSK&&previous.courseNav&&s.courseNav&&previous.img!==s.img;
+ clearTimer();cancelReveal();clearCrossfade();cancelTyping();const token=++transitionToken;
+ index=i;manualCarousel=!!options.manual;scrollComplete=false;exitSaved=false;
+ stage.dataset.step=String(s.within+1);stage.dataset.flow=String(s.flow);stage.dataset.slide=s.slide;
+ const notesChanged=lastNotes!==JSON.stringify(s.notes);rebuildNotes(s.notes,i!==0);
+ const a=IMAGES[s.img];if(screen.dataset.img!==s.img){screen.src=a.src;screen.dataset.img=s.img;}screen.alt=s.alt;
+ device.style.aspectRatio=s.scroll?'1280 / 799':`${a.w} / ${a.h}`;
+ stage.classList.toggle('scrollable',!!s.scroll);scroll.scrollTop=0;
+ scroll.setAttribute('tabindex',s.scroll?'0':'-1');scroll.setAttribute('aria-label',s.scroll?'Scrollable Custodial Training program details':s.alt);
+ rebuildMarkers(s.marker||[],i!==0&&notesChanged);
+ hot.dataset.tipAlign=s.tipAlign||'';hot.hidden=!s.hot;if(s.hot){positionControl(hot,s.hot);if(s.tipAlign==='center')hot.classList.remove('tip-left','tip-right');hot.setAttribute('aria-label',s.label||'Continue guided interaction');}
+ buildSecondary(s);
+ device.setAttribute('tabindex',s.courseNav?'0':'-1');device.setAttribute('role',s.courseNav?'region':'group');device.setAttribute('aria-label',s.courseNav?'Training courses. Swipe or use left and right arrow keys to explore.':s.alt);
+ $('next-flow').hidden=s.action!=='next';$('restart').hidden=s.action!=='restart'||!!s.scroll;
+ $('scroll-hint').hidden=!s.scroll;
+ anywhere.hidden=!s.anywhere;updateGuidance();
+ updateProgress(s.flow,s.within);$('live-status').textContent=`${s.alt}. Flow ${s.flow}, step ${s.within+1} of ${FLOW_LENGTHS[s.flow-1]}`;
+ if(isCarouselChange)crossfade(oldSource,token);
+ if(s.scroll)screen.decode().then(()=>requestAnimationFrame(()=>revealProgramContent(token)),()=>{});
+ startAutoplay(i);if(s.typing)startTyping(token);refreshMobileUI(options);
+}
+function restart(){lastNotes='';lastFlow=0;markers.dataset.sig='';showStep(0,{user:true,reset:true});}
+function updateScrollState(){
+ if(!STEPS[index].scroll)return;
+ const max=scroll.scrollHeight-scroll.clientHeight;if(max<=0)return;
+ if(scroll.scrollTop>10)$('scroll-hint').hidden=true;
+ if(scroll.scrollTop>=max-3&&!scrollComplete){scrollComplete=true;$('restart').hidden=false;updateGuidance();$('live-status').textContent='All three flows completed';refreshMobileUI({user:true});}
+}
+
+// Mobile-only viewport and touch helpers. They preserve original image coordinates.
+let mobileViewFrame=null,mobileViewRevision=0;
+const mobileMode=()=>matchMedia('(max-width:900px)').matches;
+function mobileVisibleHeight(){return window.designDecisionViewportHeight || (window.visualViewport?window.visualViewport.height:window.innerHeight);}
+
+function updateMobileSizing(){
+ if(!mobileMode())return;
+ const height=mobileVisibleHeight();
+ document.getElementById('stage').style.setProperty('--mobile-device-width',height<=600?'190px':height<=720?'200px':'220px');
+}
+function fitTouchRect(rect,bounds,target=mobileMode()?40:32){
+ const width=Math.min(Math.max(rect.w,target),bounds.right-bounds.left),height=Math.min(Math.max(rect.h,target),bounds.bottom-bounds.top);
+ return {x:Math.max(bounds.left,Math.min(rect.x+rect.w/2-width/2,bounds.right-width)),y:Math.max(bounds.top,Math.min(rect.y+rect.h/2-height/2,bounds.bottom-height)),w:width,h:height};
+}
+function touchIntersects(a,b){return Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x)>.05&&Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y)>.05;}
+function refreshTouchTargets(){
+ const device=document.getElementById('phone'),primary=document.getElementById('hotspot'),layer=document.getElementById('control-layer');
+ const buttons=[primary,...(layer?Array.from(layer.children).filter(n=>n.tagName.toLowerCase()==='button'):[])].filter(n=>!n.hidden);
+ const width=device.clientWidth;if(!width)return;
+ const aspect=(device.style.aspectRatio||'390 / 844').split('/').map(Number),height=width*aspect[1]/aspect[0];
+ const items=buttons.map(button=>{
+  const rect={x:parseFloat(button.style.left)*width/100,y:parseFloat(button.style.top)*height/100,w:parseFloat(button.style.width)*width/100,h:parseFloat(button.style.height)*height/100};
+  return {button,rect,bounds:{left:0,top:0,right:width,bottom:height+12}};
+ });
+ // Split neighboring targets at the space between their original visual areas.
+ // Duplicate primary/course controls retain the same destination and are allowed.
+ for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){
+  const a=items[i],b=items[j],ra=a.rect,rb=b.rect;
+  if(!touchIntersects(fitTouchRect(ra,a.bounds),fitTouchRect(rb,b.bounds)))continue;
+  const separateX=ra.x+ra.w<=rb.x+.05||rb.x+rb.w<=ra.x+.05;
+  const separateY=ra.y+ra.h<=rb.y+.05||rb.y+rb.h<=ra.y+.05;
+  if(!separateX&&!separateY)continue;
+  if(separateX&&(!separateY||Math.abs((ra.x+ra.w/2)-(rb.x+rb.w/2))>=Math.abs((ra.y+ra.h/2)-(rb.y+rb.h/2)))){
+   const [left,right]=ra.x<rb.x?[a,b]:[b,a],cut=(left.rect.x+left.rect.w+right.rect.x)/2;
+   left.bounds.right=Math.min(left.bounds.right,cut);right.bounds.left=Math.max(right.bounds.left,cut);
+  }else{
+   const [above,below]=ra.y<rb.y?[a,b]:[b,a],cut=(above.rect.y+above.rect.h+below.rect.y)/2;
+   above.bounds.bottom=Math.min(above.bounds.bottom,cut);below.bounds.top=Math.max(below.bounds.top,cut);
+  }
+ }
+ for(const {button,rect,bounds} of items){
+  const hit=fitTouchRect(rect,bounds);
+  button.style.setProperty('--touch-left',(hit.x-rect.x)+'px');button.style.setProperty('--touch-top',(hit.y-rect.y)+'px');
+  button.style.setProperty('--touch-width',hit.w+'px');button.style.setProperty('--touch-height',hit.h+'px');
+  button.dataset.touchRect=JSON.stringify(hit);button.dataset.visualRect=JSON.stringify(rect);
+  button.classList.toggle('tip-above',(rect.y+rect.h)/height>.84);
+  // Keep hints on the screen when the target is close to an edge.
+  button.classList.toggle('tip-left',button.dataset.tipAlign!=='center'&&(rect.x+rect.w/2)/width<.28);button.classList.toggle('tip-right',button.dataset.tipAlign!=='center'&&(rect.x+rect.w/2)/width>.72);
+ }
+}
+// One header represents ordinary steps, Next Flow, and the completed state.
+function syncDecisionHeader(){
+ const root=document.getElementById('stage'),details=document.getElementById('decision-details');
+ const next=!document.getElementById('next-flow').hidden,restart=!document.getElementById('restart').hidden;
+ const state=next?'next':restart?'restart':'none';
+ document.getElementById('details-heading').textContent=next?'Click Next Flow to continue':restart?'All flows completed':'Design details (Flow '+root.dataset.flow+')';
+ details.classList.toggle('flow-next',next);
+ details.classList.toggle('action-ready',state!=='none');
+ root.classList.toggle('action-ready',state!=='none');
+ root.dataset.actionState=state;
+}
+// Keep mobile progress below the artwork and anchor desktop guidance at lower left.
+function arrangeDecisionLayout(){
+ const root=document.getElementById('stage'),layout=document.getElementById('design-layout');
+ const heading=document.getElementById('decision-heading'),phoneColumn=document.getElementById('phone-column');
+ const details=document.getElementById('decision-details'),progress=document.getElementById('flow-progress');
+ const title=document.getElementById('details-heading'),actions=document.getElementById('actions'),panel=document.getElementById('completion-panel');
+ const guide=document.getElementById('screen-guide'),notes=document.getElementById('annotation-list')||document.getElementById('annotation');
+ const mobile=mobileMode(),action=!document.getElementById('next-flow').hidden||!document.getElementById('restart').hidden;
+ const placement=mobile?'mobile':'desktop',key=placement+':'+action;
+ panel.hidden=mobile&&!action;
+ if(root.dataset.layoutKey===key)return;
+ if(mobile){
+  phoneColumn.append(guide);
+  if(action){panel.append(title,actions);details.append(panel,notes);}
+  else details.append(title,notes,actions,panel);
+  layout.append(heading,phoneColumn,progress,details);
+ }else{
+  if(action){panel.append(guide,title,actions);details.append(notes,panel);}
+  else{panel.append(guide,actions);details.append(title,notes,panel);}
+  layout.append(heading,details,phoneColumn);root.append(progress);
+ }
+ root.dataset.progressPlacement=placement;root.dataset.layoutKey=key;
+}
+function refreshMobileUI(options={}){
+ syncDecisionHeader();
+ arrangeDecisionLayout();
+ ++mobileViewRevision;
+ if(mobileViewFrame!==null){cancelAnimationFrame(mobileViewFrame);mobileViewFrame=null;}
+ updateMobileSizing();refreshTouchTargets();
+ if(!mobileMode()||!options.user)return;
+ const revision=mobileViewRevision;
+ mobileViewFrame=requestAnimationFrame(()=>{
+  mobileViewFrame=null;if(revision!==mobileViewRevision||!mobileMode())return;
+  let target,block='nearest';
+  const next=document.getElementById('next-flow'),restart=document.getElementById('restart'),hot=document.getElementById('hotspot');
+  if(options.flowStart||options.reset){target=document.getElementById('decision-heading');block='start';}
+  else if(!next.hidden)target=next;
+  else if(!restart.hidden)target=restart;
+  else target=!hot.hidden?hot:document.getElementById('phone');
+  if(!target)return;
+  const rect=target.getBoundingClientRect(),height=mobileVisibleHeight();
+  if(window.parent!==window&&window.scrollDecisionTarget)window.scrollDecisionTarget(target,block);else if(rect.top<16||rect.bottom>height-16)target.scrollIntoView({block,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+ });
+}
+function mobileResize(){arrangeDecisionLayout();updateMobileSizing();refreshTouchTargets();}
+window.addEventListener('resize',mobileResize,{passive:true});
+if(window.visualViewport)window.visualViewport.addEventListener('resize',mobileResize,{passive:true});
+updateMobileSizing();
+
+hot.addEventListener('click',()=>{if(!typingActive&&STEPS[index].hot)activate(STEPS[index].hotAction||'next');});
+anywhere.addEventListener('click',()=>{if(STEPS[index].anywhere)nextStep();});
+$('next-flow').addEventListener('click',nextStep);$('restart').addEventListener('click',restart);
+scroll.addEventListener('scroll',updateScrollState,{passive:true});
+for(const event of ['wheel','touchstart','pointerdown','keydown'])scroll.addEventListener(event,cancelReveal,{passive:true});
+stage.addEventListener('click',event=>{if(event.target.closest('button,a')||STEPS[index].scroll)return;hot.classList.remove('flash');void hot.offsetWidth;hot.classList.add('flash');});
+hot.addEventListener('animationend',()=>hot.classList.remove('flash'));
+
+// Native vertical page scrolling remains available while horizontal swipes
+// select courses. Manual navigation pauses the demonstration timer.
+let coursePointer=null,suppressCourseClickUntil=0;
+function selectAdjacentCourse(delta){
+ const s=STEPS[index];if(!s.courseNav)return;
+ const current=['custodial','appliance','cna','english'].indexOf(s.img);
+ const next=Math.max(0,Math.min(3,current+delta));
+ if(next!==current)showStep(COURSE_STEPS[next],{manual:true,user:true});
+}
+device.addEventListener('keydown',event=>{
+ if(!STEPS[index].courseNav||!['ArrowLeft','ArrowRight'].includes(event.key))return;
+ event.preventDefault();selectAdjacentCourse(event.key==='ArrowRight'?1:-1);
+});
+device.addEventListener('pointerdown',event=>{
+ coursePointer=STEPS[index].courseNav?{id:event.pointerId,x:event.clientX,y:event.clientY}:null;
+},{passive:true});
+device.addEventListener('pointercancel',()=>{coursePointer=null;},{passive:true});
+device.addEventListener('pointerup',event=>{
+ const start=coursePointer;coursePointer=null;
+ if(!start||start.id!==event.pointerId||!STEPS[index].courseNav)return;
+ const dx=event.clientX-start.x,dy=event.clientY-start.y;
+ if(Math.abs(dx)<36||Math.abs(dx)<Math.abs(dy)*1.4)return;
+ suppressCourseClickUntil=performance.now()+350;selectAdjacentCourse(dx<0?1:-1);
+},{passive:true});
+device.addEventListener('click',event=>{
+ if(performance.now()<suppressCourseClickUntil){event.preventDefault();event.stopImmediatePropagation();}
+},true);
+
+document.addEventListener('visibilitychange',()=>{clearTimer();if(!document.hidden)startAutoplay(index);});
+
+// Pause the mobile carousel while readers are viewing content below the screen.
+let courseScreenVisible=true;
+window.addEventListener('resize',()=>{clearTimer();startAutoplay(index);},{passive:true});
+if(typeof IntersectionObserver!=='undefined'){
+ const courseObserver=new IntersectionObserver(entries=>{
+  const entry=entries.find(e=>e.target===device);if(!entry)return;
+  const visible=entry.isIntersecting&&entry.intersectionRatio>=.35;
+  if(visible===courseScreenVisible)return;
+  courseScreenVisible=visible;
+  if(mobileMode()){clearTimer();if(visible)startAutoplay(index);}
+ },{threshold:[0,.35]});
+ courseObserver.observe(device);
+}
+
+showStep(0);
+window.DesignDecisionPreview={getStep:()=>index,getFlow:()=>STEPS[index].flow,goToStep:showStep,getSlides:()=>STEPS.map(s=>s.slide),getState:()=>({index,manualCarousel,scrollComplete,exitSaved,typingActive})};
+</script></body></html>
