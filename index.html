@@ -295,22 +295,22 @@
         }, 900);
       }
 
-      const alignSlotWithName = () => {
+      const alignSlotWithHeading = () => {
         const heroContent = document.querySelector('.hero-content');
-        const heroName = heroContent?.querySelector('.hero-title__primary');
+        const heroHeading = heroContent?.querySelector('#hero-title');
         const heroSlot = document.querySelector('.hero-slot');
-        if (!heroContent || !heroName || !heroSlot) return;
+        if (!heroContent || !heroHeading || !heroSlot) return;
 
         if (window.matchMedia('(min-width: 1121px)').matches) {
-          const nameTop = heroName.getBoundingClientRect().top - heroContent.getBoundingClientRect().top;
-          heroSlot.style.top = `${nameTop + (heroName.offsetHeight - heroSlot.offsetHeight) / 2}px`;
+          const headingTop = heroHeading.getBoundingClientRect().top - heroContent.getBoundingClientRect().top;
+          heroSlot.style.top = `${headingTop + (heroHeading.offsetHeight - heroSlot.offsetHeight) / 2}px`;
         } else {
           heroSlot.style.removeProperty('top');
         }
       };
 
-      requestAnimationFrame(alignSlotWithName);
-      document.fonts?.ready.then(alignSlotWithName);
+      requestAnimationFrame(alignSlotWithHeading);
+      document.fonts?.ready.then(alignSlotWithHeading);
 
       let slotResizeFrame;
       window.addEventListener('resize', () => {
@@ -322,7 +322,7 @@
             reel.style.transition = 'none';
             reel.style.transform = `translateY(${-currentPositions[index] * itemHeight}px)`;
           });
-          alignSlotWithName();
+          alignSlotWithHeading();
         });
       });
 const defaultTheme = document.body.dataset.project || 'hero';
