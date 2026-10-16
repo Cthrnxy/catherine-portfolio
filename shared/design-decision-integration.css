@@ -22,7 +22,11 @@ body .stage,body.kiosk-project .stage {
 }
 @media(min-width:901px) {
  body .stage {height:auto;min-height:700px;}
- .stage .design-layout {min-height:664px;}
+ /* The section label spans both columns; artwork starts on the next row. */
+ .stage .design-layout {
+  min-height:664px;
+  grid-template-areas:"eyebrow eyebrow" ". phone" "title phone" "details-title phone" "annotations phone" ". phone" "completion phone";
+ }
 }
 @media(max-width:900px) {
  body .stage {height:auto;min-height:0;}
