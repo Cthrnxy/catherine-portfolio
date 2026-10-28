@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Nunito:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,500;100,600;100,700&family=Caveat:wght@400;500&family=Nunito:wght@400;600&display=swap");
 
 :root {
   --ink: #020617;
@@ -164,7 +164,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .hero h1, .about h2 {
   margin: 0;
   font-family: "Archivo", Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
@@ -176,7 +176,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .hero-title__primary {
   font-family: "Archivo", Arial, sans-serif;
   font-size: var(--home-heading-size);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--primary-text);
 }
 @keyframes hero-glow-drift {
@@ -235,7 +235,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   color: #b55f00;
   font-family: "Archivo", Arial, sans-serif;
   font-size: var(--home-heading-size);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
@@ -781,6 +781,26 @@ body { color: var(--primary-text); }
   .about {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+}
+
+/* Catherine retains the original 13-second color animation. */
+#hero-title .hero-title__name {
+  color: #8875d1;
+  text-decoration: none;
+  animation: catherine-color-shift 13s ease-in-out infinite;
+}
+@keyframes catherine-color-shift {
+  0%, 11%   { color: #8875d1; }
+  23%, 31%  { color: #476fd1; }
+  47%, 55%  { color: #3f8c68; }
+  68%, 76%  { color: #b96a2f; }
+  89%, 100% { color: #a756b4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hero-title .hero-title__name {
+    animation: none;
+    color: #a294e0;
   }
 }
 
