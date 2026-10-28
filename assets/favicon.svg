@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="96 80 880 880" width="64" height="64">
+<title>Catherine Yang</title>
+<style>:root{color:#555860}@media(prefers-color-scheme:dark){:root{color:#e7e4f7}}</style>
+<path d="M704 185C510 110 286 200 232 403C176 612 311 824 520 861C670 888 818 831 895 716C806 790 694 819 588 795C427 759 331 599 367 440C402 282 544 182 704 185Z" fill="currentColor"/>
+            <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="18"/>
+            <ellipse cx="545" cy="520" rx="382" ry="170" transform="rotate(18 545 520)" fill="none" stroke="currentColor" stroke-width="6"/>
+            <circle cx="786" cy="455" r="36" fill="currentColor"/>
+</svg>
