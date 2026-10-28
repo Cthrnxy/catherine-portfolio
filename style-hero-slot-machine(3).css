@@ -164,7 +164,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .hero h1, .about h2 {
   margin: 0;
   font-family: "Archivo", Arial, sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
@@ -176,7 +176,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .hero-title__primary {
   font-family: "Archivo", Arial, sans-serif;
   font-size: var(--home-heading-size);
-  font-weight: 500;
+  font-weight: 300;
   color: var(--primary-text);
 }
 @keyframes hero-glow-drift {
@@ -235,7 +235,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   color: #b55f00;
   font-family: "Archivo", Arial, sans-serif;
   font-size: var(--home-heading-size);
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
