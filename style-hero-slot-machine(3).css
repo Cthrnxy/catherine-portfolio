@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Instrument+Serif&family=Nunito:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,300;100,400;100,600;100,700&family=Caveat:wght@400;500&family=Nunito:wght@400;600&display=swap");
 
 :root {
   --ink: #020617;
@@ -164,24 +164,20 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .hero h1, .about h2 {
   margin: 0;
   font-family: "Archivo", Arial, sans-serif;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
 .hero h1 {
-  font-family: "Archivo", Arial, sans-serif;
-  font-size: 70px;
-  font-weight: 400;
+  font-size: var(--home-heading-size);
+  max-width: 100%;
 }
-.hero-title__line { display: block; white-space: nowrap; }
-.hero-title__primary { font-family: "Instrument Serif", Georgia, serif; font-size: var(--home-heading-size); font-weight: 400; color: var(--primary-text); }
-.hero-title__secondary {
-  color: var(--orange);
-  margin-top: 12px;
+.hero-title__line { display: block; white-space: normal; }
+.hero-title__primary {
   font-family: "Archivo", Arial, sans-serif;
-  font-size: 40px;
-  font-weight: 300;
-  letter-spacing: -0.02em;
+  font-size: var(--home-heading-size);
+  font-weight: 700;
+  color: var(--primary-text);
 }
 @keyframes hero-glow-drift {
   0% { transform: translateX(-50%) translate3d(-18px, -8px, 0) scale(1.02) rotate(-0.45deg); }
@@ -237,9 +233,9 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
 .work-heading {
   margin: 0;
   color: #b55f00;
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: "Archivo", Arial, sans-serif;
   font-size: var(--home-heading-size);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.04em;
 }
@@ -332,7 +328,7 @@ body[data-project="about"] .theme-wash--about { opacity: 1; transform: translate
   scroll-margin-top: 24px;
 }
 .about-copy { display: flex; flex-direction: column; gap: 24px; }
-.about h2 { color: var(--green); font-family: "Instrument Serif", Georgia, serif; font-size: var(--home-heading-size); }
+.about h2 { color: var(--green); font-family: "Archivo", Arial, sans-serif; font-size: var(--home-heading-size); }
 .about-copy p { margin: 0; font-size: 16px; line-height: 1.2; }
 .about-copy p + p { margin-top: 19px; }
 .about-art { width: 503px; height: 422px; object-fit: contain; }
@@ -490,7 +486,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid rgb(37 99 235 / 55%);
   }
   .hero-content { padding: 78px 0 76px; }
   .hero h1 { font-size: clamp(32px, 12.5vw, 52px); }
-  .hero-title__secondary { font-size: clamp(22px, 6.6vw, 36px); }
   .hero-content > p { width: 100%; margin-top: 28px; font-size: 20px; line-height: 1.3; }
   .explore-link { margin-top: 96px; font-size: 13px; }
 
@@ -786,30 +781,6 @@ body { color: var(--primary-text); }
   .about {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-  }
-}
-
-/* =========================================================
-   CATHERINE COLOR — from frosted-glass version
-   ========================================================= */
-#hero-title .hero-title__name {
-  color: #8875d1;
-  text-decoration: none;
-  animation: catherine-color-shift 13s ease-in-out infinite;
-}
-
-@keyframes catherine-color-shift {
-  0%, 11%   { color: #8875d1; }
-  23%, 31%  { color: #476fd1; }
-  47%, 55%  { color: #3f8c68; }
-  68%, 76%  { color: #b96a2f; }
-  89%, 100% { color: #a756b4; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #hero-title .hero-title__name {
-    animation: none;
-    color: #a294e0;
   }
 }
 
